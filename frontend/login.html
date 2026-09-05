@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>AI Shopping Agent - Login</title>
 
     <style>
@@ -22,15 +23,17 @@
 
         .box {
             width: 400px;
+            max-width: 92%;
             background: white;
             padding: 35px;
             border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
         }
 
         h1 {
             text-align: center;
-            margin-bottom: 10px;
+            margin: 0 0 10px;
+            font-size: 30px;
         }
 
         .sub {
@@ -51,6 +54,12 @@
             border: 1px solid #ccc;
             border-radius: 8px;
             font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.15);
         }
 
         button {
@@ -68,6 +77,11 @@
 
         button:hover {
             background: #5568d8;
+        }
+
+        button:disabled {
+            background: #999;
+            cursor: not-allowed;
         }
 
         #message {
@@ -91,13 +105,17 @@
             color: #16803c;
         }
 
-        .demo {
+        .info {
+            display: block !important;
+            background: #e8f0ff;
+            color: #3157a6;
+        }
+
+        .security-note {
             margin-top: 20px;
-            padding: 12px;
-            background: #f3f3ff;
-            border-radius: 8px;
             text-align: center;
-            font-size: 13px;
+            font-size: 12px;
+            color: #888;
         }
     </style>
 </head>
@@ -112,21 +130,23 @@
 
     <form id="loginForm">
 
-        <label>Email Address</label>
+        <label for="email">Email Address</label>
 
         <input
             type="email"
             id="email"
             placeholder="Enter your email"
+            autocomplete="email"
             required
         >
 
-        <label>Password</label>
+        <label for="password">Password</label>
 
         <input
             type="password"
             id="password"
             placeholder="Enter your password"
+            autocomplete="current-password"
             required
         >
 
@@ -138,59 +158,141 @@
 
     <div id="message"></div>
 
-    <div class="demo">
-        <b>Demo Account</b><br><br>
-        Email: demo@gmail.com<br>
-        Password: Demo@123
+    <div class="security-note">
+        🔒 Please enter your registered email and password.
     </div>
 
 </div>
 
+
 <script>
+
+    /*
+     * =====================================================
+     * LOGIN CREDENTIALS
+     * =====================================================
+     *
+     * CHANGE THESE TWO VALUES TO YOUR REAL LOGIN DETAILS.
+     *
+     * IMPORTANT:
+     * This is only a frontend login.
+     * These credentials are NOT secure because they exist
+     * inside the browser's JavaScript source.
+     *
+     * For real security, use your backend/database.
+     */
+
+    const CORRECT_EMAIL = "nersupavankumar304@gmail.com";
+    const CORRECT_PASSWORD = "123456";
+
+
     const form = document.getElementById("loginForm");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const message = document.getElementById("message");
+    const loginBtn = document.getElementById("loginBtn");
+
 
     form.addEventListener("submit", function(event) {
 
         event.preventDefault();
 
-        const email = document.getElementById("email").value
-            .trim()
-            .toLowerCase();
 
-        const password = document.getElementById("password").value;
+        // Get entered values
+        const email = emailInput.value.trim().toLowerCase();
+        const password = passwordInput.value;
 
-        const message = document.getElementById("message");
 
+        // Clear previous message
         message.className = "";
         message.textContent = "";
 
-        // CORRECT DEMO CREDENTIALS
-        const correctEmail = "demo@gmail.com";
-        const correctPassword = "Demo@123";
 
-        if (email !== correctEmail || password !== correctPassword) {
+        // Basic validation
+        if (!email) {
+
+            message.textContent = "Please enter your email address.";
+            message.className = "error";
+
+            return;
+        }
+
+
+        if (!password) {
+
+            message.textContent = "Please enter your password.";
+            message.className = "error";
+
+            return;
+        }
+
+
+        // Validate email format
+        const emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailPattern.test(email)) {
 
             message.textContent =
-                "Invalid email or password.";
+                "Please enter a valid email address.";
 
             message.className = "error";
 
             return;
         }
 
+
+        /*
+         * =================================================
+         * IMPORTANT LOGIN CHECK
+         * =================================================
+         *
+         * BOTH email AND password must match.
+         */
+
+        if (
+            email !== CORRECT_EMAIL.toLowerCase() ||
+            password !== CORRECT_PASSWORD
+        ) {
+
+            message.textContent =
+                "Incorrect email or password.";
+
+            message.className = "error";
+
+            // Clear password
+            passwordInput.value = "";
+
+            return;
+        }
+
+
+        // Login successful
         message.textContent =
             "Login successful! Opening AI Shopping Agent...";
 
         message.className = "success";
 
+
+        // Disable button to prevent multiple clicks
+        loginBtn.disabled = true;
+        loginBtn.textContent = "Logging in...";
+
+
+        // Save login session
         localStorage.setItem("isLoggedIn", "true");
         localStorage.setItem("userEmail", email);
 
+
+        // Open main website
         setTimeout(function() {
+
             window.location.href = "index.html";
+
         }, 800);
 
     });
+
 </script>
 
 </body>
