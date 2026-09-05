@@ -22,7 +22,7 @@
         }
 
         .box {
-            width: 400px;
+            width: 430px;
             max-width: 92%;
             background: white;
             padding: 35px;
@@ -34,18 +34,21 @@
             text-align: center;
             margin: 0 0 10px;
             font-size: 30px;
+            line-height: 1.2;
         }
 
         .sub {
             text-align: center;
             color: #777;
             margin-bottom: 25px;
+            font-size: 16px;
         }
 
         label {
             display: block;
             margin: 15px 0 7px;
             font-weight: bold;
+            font-size: 16px;
         }
 
         input {
@@ -105,11 +108,18 @@
             color: #16803c;
         }
 
-        .security-note {
+        .demo {
             margin-top: 20px;
+            padding: 14px;
+            background: #f3f3ff;
+            border-radius: 8px;
             text-align: center;
-            font-size: 12px;
-            color: #888;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .demo b {
+            font-size: 15px;
         }
     </style>
 </head>
@@ -118,7 +128,7 @@
 
 <div class="box">
 
-    <h1>🛍️ AI Shopping Agent</h1>
+    <h1>🛍️ AI Shopping<br>Agent</h1>
 
     <p class="sub">Login to continue</p>
 
@@ -152,23 +162,28 @@
 
     <div id="message"></div>
 
-    <div class="security-note">
-        🔒 Enter your registered email and password.
+    <div class="demo">
+        <b>Demo Account</b>
+        <br><br>
+        Email: demo@gmail.com
+        <br>
+        Password: Demo@123
     </div>
 
 </div>
 
+
 <script>
 
     // =====================================================
-    // YOUR LOGIN CREDENTIALS
+    // DEMO LOGIN CREDENTIALS
     // =====================================================
-    // CHANGE THESE TWO VALUES TO YOUR REAL LOGIN DETAILS.
 
     const CORRECT_EMAIL = "demo@gmail.com";
     const CORRECT_PASSWORD = "Demo@123";
 
 
+    // Get elements
     const form = document.getElementById("loginForm");
     const emailInput = document.getElementById("email");
     const passwordInput = document.getElementById("password");
@@ -176,12 +191,16 @@
     const message = document.getElementById("message");
 
 
+    // =====================================================
+    // LOGIN
+    // =====================================================
+
     form.addEventListener("submit", function(event) {
 
         event.preventDefault();
 
 
-        // Get entered details
+        // Get entered email and password
         const email = emailInput.value.trim().toLowerCase();
         const password = passwordInput.value;
 
@@ -191,9 +210,9 @@
         message.textContent = "";
 
 
-        // =====================================================
-        // CHECK EMAIL AND PASSWORD
-        // =====================================================
+        // =================================================
+        // CHECK BOTH EMAIL AND PASSWORD
+        // =================================================
 
         if (
             email !== CORRECT_EMAIL.toLowerCase() ||
@@ -203,16 +222,16 @@
             message.textContent = "Incorrect email or password.";
             message.className = "error";
 
-            // Clear password after failed login
+            // Clear wrong password
             passwordInput.value = "";
 
             return;
         }
 
 
-        // =====================================================
-        // LOGIN SUCCESSFUL
-        // =====================================================
+        // =================================================
+        // LOGIN SUCCESS
+        // =================================================
 
         message.textContent =
             "Login successful! Opening AI Shopping Agent...";
@@ -220,7 +239,7 @@
         message.className = "success";
 
 
-        // Prevent multiple clicks
+        // Disable login button
         loginBtn.disabled = true;
         loginBtn.textContent = "Logging in...";
 
