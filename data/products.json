@@ -1,0 +1,637 @@
+[
+  {
+    "id": 1,
+    "name": "Sony WH-CH520",
+    "category": "headphones",
+    "price": 2999,
+    "description": "Wireless headphones with long battery life, suitable for studying and everyday use.",
+    "features": ["wireless", "lightweight", "50-hour battery"],
+    "image": "images/sony-wh-ch520.png",
+    "link": "https://www.croma.com/l/sony-wh-ch520-wireless-headphones-0atz07b.html"
+  },
+  {
+    "id": 2,
+    "name": "JBL Tune 510BT",
+    "category": "headphones",
+    "price": 2499,
+    "description": "Affordable wireless headphones with powerful bass and good battery life.",
+    "features": ["wireless", "bass", "40-hour battery"],
+    "image": "images/jbl-tune-510bt.png",
+    "link": "https://in.jbl.com/TUNE510BT-.html"
+  },
+  {
+    "id": 3,
+    "name": "boAt Rockerz 450",
+    "category": "headphones",
+    "price": 1499,
+    "description": "Budget wireless headphones for music, online classes and daily use.",
+    "features": ["wireless", "budget", "15-hour battery"],
+    "image": "images/boat-rockerz-450.png",
+    "link": "https://www.boat-lifestyle.com/products/rockerz-450"
+  },
+  {
+    "id": 4,
+    "name": "Logitech K380",
+    "category": "keyboard",
+    "price": 2995,
+    "description": "Compact wireless keyboard suitable for laptops and productivity.",
+    "features": ["wireless", "compact", "multi-device"],
+    "image": "images/logitech-k380.png",
+    "link": "https://www.logitech.com/en-in/shop/p/k380-multi-device-bluetooth-keyboard"
+  },
+  {
+    "id": 5,
+    "name": "Logitech M331",
+    "category": "mouse",
+    "price": 1595,
+    "description": "Quiet wireless mouse designed for comfortable everyday computer use.",
+    "features": ["wireless", "silent", "comfortable"],
+    "image": "images/logitech-m331.png",
+    "link": "https://www.logitech.com/en-in/shop/p/m331-silent-plus-wireless-mouse.910-004584"
+  },
+  {
+    "id": 6,
+    "name": "Portronics Power Plate",
+    "category": "charger",
+    "price": 899,
+    "description": "Compact charging accessory for everyday devices.",
+    "features": ["compact", "portable", "fast charging"],
+    "image": "images/portronics-power-plate.png",
+    "link": "https://www.portronics.com/"
+  },
+  {
+    "id": 8,
+    "name": "JBL Live 660NC",
+    "category": "headphones",
+    "price": 7999,
+    "description": "Wireless over-ear headphones with adaptive noise cancellation and strong bass.",
+    "features": ["wireless", "noise cancelling", "bass", "40-hour battery"],
+    "image": "images/jbl-live-660nc.png",
+    "link": "https://in.jbl.com/"
+  },
+  {
+    "id": 9,
+    "name": "boAt Nirvana 751 ANC",
+    "category": "headphones",
+    "price": 3999,
+    "description": "Affordable wireless headphones with active noise cancellation for everyday listening.",
+    "features": ["wireless", "ANC", "budget", "65-hour battery"],
+    "image": "images/boat-nirvana-751.png",
+    "link": "https://www.boat-lifestyle.com/"
+  },
+  {
+    "id": 10,
+    "name": "Apple AirPods 3rd Generation",
+    "category": "earbuds",
+    "price": 18900,
+    "description": "True wireless earbuds with spatial audio and a compact charging case.",
+    "features": ["wireless", "spatial audio", "compact", "charging case"],
+    "image": "images/apple-airpods-3.png",
+    "link": "https://www.apple.com/in/airpods/"
+  },
+  {
+    "id": 11,
+    "name": "Samsung Galaxy Buds FE",
+    "category": "earbuds",
+    "price": 5999,
+    "description": "Comfortable wireless earbuds with active noise cancellation and clear audio.",
+    "features": ["wireless", "ANC", "comfortable", "clear audio"],
+    "image": "images/samsung-buds-fe.png",
+    "link": "https://www.samsung.com/in/"
+  },
+  {
+    "id": 12,
+    "name": "OnePlus Nord Buds 2",
+    "category": "earbuds",
+    "price": 2299,
+    "description": "Affordable true wireless earbuds with active noise cancellation and powerful bass.",
+    "features": ["wireless", "ANC", "bass", "budget"],
+    "image": "images/oneplus-nord-buds-2.png",
+    "link": "https://www.oneplus.in/"
+  },
+  {
+    "id": 13,
+    "name": "realme Buds Air 5",
+    "category": "earbuds",
+    "price": 2999,
+    "description": "Feature-rich wireless earbuds with noise cancellation and low latency.",
+    "features": ["wireless", "ANC", "low latency", "gaming"],
+    "image": "images/realme-buds-air-5.png",
+    "link": "https://www.realme.com/in/"
+  },
+  {
+    "id": 14,
+    "name": "Noise Buds VS104",
+    "category": "earbuds",
+    "price": 1299,
+    "description": "Budget true wireless earbuds for calls, music and everyday use.",
+    "features": ["wireless", "budget", "compact", "gaming"],
+    "image": "images/noise-buds-vs104.png",
+    "link": "https://www.gonoise.com/"
+  },
+  {
+    "id": 15,
+    "name": "JBL Wave Buds",
+    "category": "earbuds",
+    "price": 2999,
+    "description": "Compact wireless earbuds with deep bass and a comfortable fit.",
+    "features": ["wireless", "bass", "compact", "comfortable"],
+    "image": "images/jbl-wave-buds.png",
+    "link": "https://in.jbl.com/"
+  },
+  {
+    "id": 16,
+    "name": "boAt Airdopes 141",
+    "category": "earbuds",
+    "price": 1299,
+    "description": "Popular budget wireless earbuds with long playback and low latency.",
+    "features": ["wireless", "budget", "low latency", "long battery"],
+    "image": "images/boat-airdopes-141.png",
+    "link": "https://www.boat-lifestyle.com/"
+  },
+
+  {
+    "id": 17,
+    "name": "Logitech K480",
+    "category": "keyboard",
+    "price": 2495,
+    "description": "Bluetooth keyboard that can connect to multiple devices and is useful for productivity.",
+    "features": ["wireless", "bluetooth", "multi-device", "compact"],
+    "image": "images/logitech-k480.png",
+    "link": "https://www.logitech.com/"
+  },
+  {
+    "id": 18,
+    "name": "Logitech K580",
+    "category": "keyboard",
+    "price": 4995,
+    "description": "Slim wireless keyboard designed for quiet typing and multi-device productivity.",
+    "features": ["wireless", "slim", "quiet", "multi-device"],
+    "image": "images/logitech-k580.png",
+    "link": "https://www.logitech.com/"
+  },
+  {
+    "id": 19,
+    "name": "HP K500F",
+    "category": "keyboard",
+    "price": 1599,
+    "description": "Full-size wired keyboard designed for everyday office and home computing.",
+    "features": ["wired", "full-size", "office", "comfortable"],
+    "image": "images/hp-k500f.png",
+    "link": "https://www.hp.com/in-en/"
+  },
+  {
+    "id": 20,
+    "name": "Dell KB216",
+    "category": "keyboard",
+    "price": 799,
+    "description": "Simple full-size keyboard suitable for office and everyday desktop use.",
+    "features": ["wired", "full-size", "office", "budget"],
+    "image": "images/dell-kb216.png",
+    "link": "https://www.dell.com/en-in/"
+  },
+  {
+    "id": 21,
+    "name": "Redragon K617 Fizz",
+    "category": "keyboard",
+    "price": 2499,
+    "description": "Compact mechanical gaming keyboard designed for gamers and programmers.",
+    "features": ["mechanical", "gaming", "RGB", "compact"],
+    "image": "images/redragon-k617.png",
+    "link": "https://www.redragon.in/"
+  },
+  {
+    "id": 22,
+    "name": "Cosmic Byte CB-GK-05",
+    "category": "keyboard",
+    "price": 1899,
+    "description": "Affordable mechanical gaming keyboard with RGB lighting and compact design.",
+    "features": ["mechanical", "gaming", "RGB", "budget"],
+    "image": "images/cosmic-byte-cb-gk-05.png",
+    "link": "https://www.thecosmicbyte.com/"
+  },
+
+  {
+    "id": 23,
+    "name": "Logitech M185",
+    "category": "mouse",
+    "price": 795,
+    "description": "Simple wireless mouse suitable for laptops, office work and everyday computing.",
+    "features": ["wireless", "compact", "budget", "portable"],
+    "image": "images/logitech-m185.png",
+    "link": "https://www.logitech.com/"
+  },
+  {
+    "id": 24,
+    "name": "Logitech M235",
+    "category": "mouse",
+    "price": 1195,
+    "description": "Comfortable wireless mouse with reliable connectivity for everyday use.",
+    "features": ["wireless", "comfortable", "compact", "office"],
+    "image": "images/logitech-m235.png",
+    "link": "https://www.logitech.com/"
+  },
+  {
+    "id": 25,
+    "name": "HP Z3700 Wireless Mouse",
+    "category": "mouse",
+    "price": 999,
+    "description": "Slim wireless mouse with a stylish design suitable for laptops and office work.",
+    "features": ["wireless", "slim", "portable", "office"],
+    "image": "images/hp-z3700.png",
+    "link": "https://www.hp.com/in-en/"
+  },
+  {
+    "id": 26,
+    "name": "Dell WM126",
+    "category": "mouse",
+    "price": 899,
+    "description": "Reliable wireless mouse for everyday laptop and desktop use.",
+    "features": ["wireless", "budget", "comfortable", "office"],
+    "image": "images/dell-wm126.png",
+    "link": "https://www.dell.com/en-in/"
+  },
+  {
+    "id": 27,
+    "name": "Logitech G102 Lightsync",
+    "category": "gaming mouse",
+    "price": 1795,
+    "description": "Wired gaming mouse with customizable RGB lighting and accurate tracking.",
+    "features": ["gaming", "RGB", "wired", "high precision"],
+    "image": "images/logitech-g102.png",
+    "link": "https://www.logitech.com/"
+  },
+  {
+    "id": 28,
+    "name": "Razer DeathAdder Essential",
+    "category": "gaming mouse",
+    "price": 1999,
+    "description": "Ergonomic gaming mouse designed for comfortable long gaming sessions.",
+    "features": ["gaming", "ergonomic", "precision", "wired"],
+    "image": "images/razer-deathadder-essential.png",
+    "link": "https://www.razer.com/"
+  },
+
+  {
+    "id": 29,
+    "name": "JBL Go 3",
+    "category": "speaker",
+    "price": 2999,
+    "description": "Small portable Bluetooth speaker with powerful sound for its size.",
+    "features": ["bluetooth", "portable", "waterproof", "compact"],
+    "image": "images/jbl-go-3.png",
+    "link": "https://in.jbl.com/"
+  },
+  {
+    "id": 30,
+    "name": "JBL Flip 6",
+    "category": "speaker",
+    "price": 9999,
+    "description": "Portable Bluetooth speaker with powerful audio and water resistance.",
+    "features": ["bluetooth", "portable", "waterproof", "powerful sound"],
+    "image": "images/jbl-flip-6.png",
+    "link": "https://in.jbl.com/"
+  },
+  {
+    "id": 31,
+    "name": "boAt Stone 352",
+    "category": "speaker",
+    "price": 1799,
+    "description": "Affordable portable Bluetooth speaker for music and outdoor use.",
+    "features": ["bluetooth", "portable", "budget", "water resistant"],
+    "image": "images/boat-stone-352.png",
+    "link": "https://www.boat-lifestyle.com/"
+  },
+  {
+    "id": 32,
+    "name": "Sony SRS-XB100",
+    "category": "speaker",
+    "price": 4490,
+    "description": "Compact portable Bluetooth speaker with clear sound and long battery life.",
+    "features": ["bluetooth", "portable", "compact", "long battery"],
+    "image": "images/sony-srs-xb100.png",
+    "link": "https://www.sony.co.in/"
+  },
+  {
+    "id": 33,
+    "name": "Tribit XSound Go",
+    "category": "speaker",
+    "price": 3499,
+    "description": "Portable Bluetooth speaker designed for balanced sound and outdoor listening.",
+    "features": ["bluetooth", "portable", "waterproof", "long battery"],
+    "image": "images/tribit-xsound-go.png",
+    "link": "https://tribit.com/"
+  },
+
+  {
+    "id": 34,
+    "name": "Anker 20W USB-C Charger",
+    "category": "charger",
+    "price": 1499,
+    "description": "Compact USB-C wall charger suitable for smartphones, tablets and other devices.",
+    "features": ["USB-C", "20W", "compact", "fast charging"],
+    "image": "images/anker-20w.png",
+    "link": "https://www.anker.com/"
+  },
+  {
+    "id": 35,
+    "name": "boAt WCD 20W Charger",
+    "category": "charger",
+    "price": 699,
+    "description": "Compact fast charger for smartphones and everyday USB-C devices.",
+    "features": ["20W", "fast charging", "compact", "budget"],
+    "image": "images/boat-wcdv-20w.png",
+    "link": "https://www.boat-lifestyle.com/"
+  },
+  {
+    "id": 36,
+    "name": "Portronics Adapto 20",
+    "category": "charger",
+    "price": 799,
+    "description": "Compact fast charging adapter designed for smartphones and portable devices.",
+    "features": ["fast charging", "compact", "portable", "USB-C"],
+    "image": "images/portronics-adapto-20b.png",
+    "link": "https://www.portronics.com/"
+  },
+  {
+    "id": 37,
+    "name": "MI 33W SonicCharge Charger",
+    "category": "charger",
+    "price": 999,
+    "description": "Fast charging adapter suitable for compatible smartphones and USB devices.",
+    "features": ["33W", "fast charging", "USB", "compact"],
+    "image": "images/mi-33w-charger.png",
+    "link": "https://www.mi.com/in/"
+  },
+  {
+    "id": 38,
+    "name": "Ambrane 10000mAh Power Bank",
+    "category": "power bank",
+    "price": 999,
+    "description": "Portable 10000mAh power bank suitable for charging smartphones while travelling.",
+    "features": ["10000mAh", "portable", "USB", "travel"],
+    "image": "images/ambrane-10000mah.png",
+    "link": "https://www.ambraneindia.com/"
+  },
+  {
+    "id": 39,
+    "name": "MI 10000mAh Power Bank",
+    "category": "power bank",
+    "price": 1299,
+    "description": "Portable power bank designed to provide convenient backup charging for mobile devices.",
+    "features": ["10000mAh", "portable", "dual USB", "travel"],
+    "image": "images/mi-10000mah-powerbank.png",
+    "link": "https://www.mi.com/in/"
+  },
+  {
+    "id": 40,
+    "name": "URBN 20000mAh Power Bank",
+    "category": "power bank",
+    "price": 1799,
+    "description": "High-capacity compact power bank suitable for travel and multiple device charging.",
+    "features": ["20000mAh", "portable", "fast charging", "travel"],
+    "image": "images/urbn-20000mah.png",
+    "link": "https://urbnworld.com/"
+  },
+
+  {
+    "id": 41,
+    "name": "Spigen USB-C Cable",
+    "category": "mobile accessories",
+    "price": 799,
+    "description": "Durable USB-C charging and data cable designed for everyday smartphone use.",
+    "features": ["USB-C", "durable", "fast charging", "data transfer"],
+    "image": "images/spigen-usbc-cable.png",
+    "link": "https://www.spigen.com/"
+  },
+  {
+    "id": 42,
+    "name": "boAt Type-C Cable",
+    "category": "mobile accessories",
+    "price": 399,
+    "description": "Affordable Type-C cable suitable for charging and everyday mobile connectivity.",
+    "features": ["USB-C", "budget", "charging", "durable"],
+    "image": "images/boat-type-c-cable.png",
+    "link": "https://www.boat-lifestyle.com/"
+  },
+  {
+    "id": 43,
+    "name": "Portronics USB-C Hub",
+    "category": "laptop accessories",
+    "price": 1499,
+    "description": "Multi-port USB-C hub for connecting peripherals to laptops and tablets.",
+    "features": ["USB-C", "multi-port", "HDMI", "portable"],
+    "image": "images/portronics-usbc-hub.png",
+    "link": "https://www.portronics.com/"
+  },
+  {
+    "id": 44,
+    "name": "TP-Link USB WiFi Adapter",
+    "category": "computer accessories",
+    "price": 899,
+    "description": "Compact USB WiFi adapter for adding wireless network connectivity to computers.",
+    "features": ["WiFi", "USB", "compact", "plug-and-play"],
+    "image": "images/tp-link-wifi-adapter.png",
+    "link": "https://www.tp-link.com/in/"
+  },
+  {
+    "id": 45,
+    "name": "Logitech C270 HD Webcam",
+    "category": "webcam",
+    "price": 1795,
+    "description": "HD webcam suitable for online classes, video calls and remote meetings.",
+    "features": ["HD", "webcam", "video calls", "microphone"],
+    "image": "images/logitech-c270.png",
+    "link": "https://www.logitech.com/"
+  },
+  {
+    "id": 46,
+    "name": "HP USB Flash Drive 64GB",
+    "category": "storage",
+    "price": 599,
+    "description": "Portable USB flash drive suitable for storing and transferring everyday files.",
+    "features": ["64GB", "USB", "portable", "storage"],
+    "image": "images/hp-64gb-pendrive.png",
+    "link": "https://www.hp.com/in-en/"
+  },
+  {
+    "id": 47,
+    "name": "SanDisk Ultra 128GB",
+    "category": "storage",
+    "price": 899,
+    "description": "Portable 128GB storage device suitable for transferring documents, photos and videos.",
+    "features": ["128GB", "USB", "portable", "storage"],
+    "image": "images/sandisk-ultra-128gb.png",
+    "link": "https://www.westerndigital.com/"
+  },
+  {
+    "id": 48,
+    "name": "Amazon Basics Laptop Stand",
+    "category": "laptop accessories",
+    "price": 1299,
+    "description": "Adjustable laptop stand designed to improve desk ergonomics and viewing comfort.",
+    "features": ["adjustable", "ergonomic", "laptop", "desk"],
+    "image": "images/amazon-basics-laptop-stand.png",
+    "link": "https://www.amazon.in/"
+  },
+  {
+    "id": 49,
+    "name": "Portronics My Buddy Laptop Stand",
+    "category": "laptop accessories",
+    "price": 1199,
+    "description": "Portable laptop stand designed for comfortable working and improved laptop positioning.",
+    "features": ["portable", "adjustable", "ergonomic", "laptop"],
+    "image": "images/portronics-laptop-stand.png",
+    "link": "https://www.portronics.com/"
+  },
+  {
+    "id": 50,
+    "name": "Logitech Z120 Speakers",
+    "category": "computer speakers",
+    "price": 1295,
+    "description": "Compact wired computer speakers suitable for desktops, laptops and everyday multimedia.",
+    "features": ["wired", "compact", "desktop", "budget"],
+    "image": "images/logitech-z120.png",
+    "link": "https://www.logitech.com/"
+  },
+  {
+    "id": 51,
+    "name": "Apple MacBook Air M3 (13-inch)",
+    "category": "laptops",
+    "price": 114900,
+    "old_price": 124900,
+    "rating": 4.9,
+    "review_count": 840,
+    "discount": 8,
+    "description": "Strikingly thin and fast laptop featuring the powerful Apple M3 chip, Liquid Retina display, and up to 18 hours of battery life.",
+    "features": ["Apple M3 8-core CPU", "8GB Unified Memory", "256GB SSD", "13.6-inch Liquid Retina Display", "18-hour battery life"],
+    "image": "images/macbook-air-m3.png",
+    "link": "https://www.apple.com/in/macbook-air/"
+  },
+  {
+    "id": 52,
+    "name": "Dell XPS 13 Ultraportable Laptop",
+    "category": "laptops",
+    "price": 139990,
+    "old_price": 154990,
+    "rating": 4.7,
+    "review_count": 520,
+    "discount": 10,
+    "description": "Iconic ultra-thin laptop crafted from CNC machined aluminum with Intel Core Ultra 7 processor and borderless InfinityEdge display.",
+    "features": ["Intel Core Ultra 7 155H", "16GB LPDDR5X RAM", "512GB NVMe SSD", "13.4-inch FHD+ InfinityEdge", "Thunderbolt 4 ports"],
+    "image": "images/dell-xps-13.png",
+    "link": "https://www.dell.com/en-in/"
+  },
+  {
+    "id": 53,
+    "name": "ASUS ROG Zephyrus G14 Gaming Laptop",
+    "category": "laptops",
+    "price": 149990,
+    "old_price": 174990,
+    "rating": 4.8,
+    "review_count": 670,
+    "discount": 14,
+    "description": "Ultra-slim 14-inch gaming beast with AMD Ryzen 9 8945HS, NVIDIA GeForce RTX 4060 graphics, and 3K 120Hz OLED display.",
+    "features": ["AMD Ryzen 9 8945HS", "NVIDIA RTX 4060 8GB GDDR6", "16GB LPDDR5X RAM", "1TB Gen4 SSD", "3K OLED 120Hz 0.2ms Display"],
+    "image": "images/asus-rog-zephyrus.png",
+    "link": "https://rog.asus.com/in/"
+  },
+  {
+    "id": 54,
+    "name": "HP Spectre x360 2-in-1 Convertible",
+    "category": "laptops",
+    "price": 124990,
+    "old_price": 139990,
+    "rating": 4.6,
+    "review_count": 390,
+    "discount": 11,
+    "description": "Premium 360-degree convertible laptop featuring Intel Core Ultra 5, 2.8K OLED touchscreen display, and HP Rechargeable Tilt Pen.",
+    "features": ["Intel Core Ultra 5 125H", "16GB LPDDR5x RAM", "1TB PCIe Gen4 NVMe SSD", "14-inch 2.8K OLED Touchscreen", "360° Convertible Hinge"],
+    "image": "images/hp-spectre-x360.png",
+    "link": "https://www.hp.com/in-en/"
+  },
+  {
+    "id": 55,
+    "name": "Lenovo ThinkPad X1 Carbon Gen 11",
+    "category": "laptops",
+    "price": 145990,
+    "old_price": 162990,
+    "rating": 4.8,
+    "review_count": 480,
+    "discount": 10,
+    "description": "The ultimate ultralight business laptop built with carbon-fiber chassis, 13th Gen Intel Core i7, and enterprise-grade security.",
+    "features": ["Intel Core i7-1355U 13th Gen", "16GB LPDDR5 RAM", "512GB SSD PCIe NVMe", "14-inch WUXGA IPS Anti-glare", "MIL-STD 810H durability"],
+    "image": "images/thinkpad-x1.png",
+    "link": "https://www.lenovo.com/in/en/"
+  },
+  {
+    "id": 56,
+    "name": "Acer Swift Go 14 OLED Laptop",
+    "category": "laptops",
+    "price": 64990,
+    "old_price": 79990,
+    "rating": 4.5,
+    "review_count": 310,
+    "discount": 19,
+    "description": "Sleek and powerful ultraportable laptop equipped with 13th Gen Intel Core i5 processor and vibrant 2.8K 90Hz OLED display.",
+    "features": ["Intel Core i5-13500H 13th Gen", "16GB LPDDR5 RAM", "512GB PCIe Gen4 SSD", "14-inch 2.8K 90Hz OLED Display", "1.25kg Ultralight Body"],
+    "image": "images/acer-swift-go.png",
+    "link": "https://store.acer.com/en-in/"
+  },
+  {
+    "id": 57,
+    "name": "Apple MacBook Pro 14 (M3 Pro Chip)",
+    "category": "laptops",
+    "price": 199900,
+    "old_price": 219900,
+    "rating": 4.9,
+    "review_count": 1120,
+    "discount": 9,
+    "description": "Pro power for demanding workflows with M3 Pro chip, Liquid Retina XDR display, up to 18 hours battery, and Space Black finish.",
+    "features": ["Apple M3 Pro 11-core CPU", "18GB Unified Memory", "512GB SSD Storage", "14.2-inch Liquid Retina XDR", "HDMI & SDXC card slot"],
+    "image": "images/macbook-pro-14.png",
+    "link": "https://www.apple.com/in/macbook-pro/"
+  },
+  {
+    "id": 58,
+    "name": "MSI Stealth 16 Studio Gaming Laptop",
+    "category": "laptops",
+    "price": 184990,
+    "old_price": 209990,
+    "rating": 4.7,
+    "review_count": 280,
+    "discount": 12,
+    "description": "Ultra-thin studio & gaming laptop powered by Intel Core i9-13900H, RTX 4070 graphics, and 240Hz QHD+ display in magnesium-aluminum alloy.",
+    "features": ["Intel Core i9-13900H", "NVIDIA RTX 4070 8GB GDDR6", "32GB DDR5 5200MHz", "1TB NVMe PCIe Gen4 SSD", "16-inch QHD+ 240Hz 100% DCI-P3"],
+    "image": "images/msi-stealth-16.png",
+    "link": "https://www.msi.com/"
+  },
+  {
+    "id": 59,
+    "name": "Samsung Galaxy Book4 Pro 360",
+    "category": "laptops",
+    "price": 163990,
+    "old_price": 179990,
+    "rating": 4.6,
+    "review_count": 230,
+    "discount": 9,
+    "description": "Premium 2-in-1 touchscreen laptop with Intel Core Ultra 7, Dynamic AMOLED 2X 120Hz display, and S Pen support.",
+    "features": ["Intel Core Ultra 7 155H", "16GB LPDDR5X Memory", "1TB NVMe SSD", "16-inch 3K Dynamic AMOLED 2X", "S Pen included"],
+    "image": "images/samsung-galaxy-book.png",
+    "link": "https://www.samsung.com/in/"
+  },
+  {
+    "id": 60,
+    "name": "HP Pavilion Plus 14 Ultralight",
+    "category": "laptops",
+    "price": 72990,
+    "old_price": 84990,
+    "rating": 4.5,
+    "review_count": 410,
+    "discount": 14,
+    "description": "Powerful 14-inch compact laptop with AMD Ryzen 7 7840U, 2.8K 120Hz OLED screen, and 5MP IR webcam with privacy shutter.",
+    "features": ["AMD Ryzen 7 7840U", "16GB LPDDR5x RAM", "1TB PCIe NVMe SSD", "14-inch 2.8K 120Hz OLED", "5MP IR Camera"],
+    "image": "images/hp-pavilion-plus.png",
+    "link": "https://www.hp.com/in-en/"
+  }
+]

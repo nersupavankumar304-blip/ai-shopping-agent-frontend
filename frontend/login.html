@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - AI Shopping Agent</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #101a38, #2856d9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 430px;
+        }
+
+        .brand {
+            text-align: center;
+            color: white;
+            margin-bottom: 25px;
+        }
+
+        .brand-icon {
+            font-size: 50px;
+            margin-bottom: 8px;
+        }
+
+        .brand h1 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .brand p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .login-card {
+            background: white;
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+        }
+
+        .login-card h2 {
+            text-align: center;
+            color: #17213c;
+            margin-bottom: 8px;
+            font-size: 27px;
+        }
+
+        .login-subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 28px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #d5d9e2;
+            border-radius: 10px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .form-group input:focus {
+            border-color: #2864e8;
+            box-shadow: 0 0 0 3px rgba(40,100,232,0.1);
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper input {
+            padding-right: 50px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+            font-size: 14px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: #555;
+        }
+
+        .forgot {
+            color: #2864e8;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .login-button {
+            width: 100%;
+            border: none;
+            background: #2864e8;
+            color: white;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .login-button:hover {
+            background: #1e4fc2;
+        }
+
+        .message {
+            display: none;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 18px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .message.success {
+            display: block;
+            background: #e8f7ee;
+            color: #18733b;
+        }
+
+        .message.error {
+            display: block;
+            background: #fdeaea;
+            color: #b42318;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 25px 0;
+            color: #999;
+            font-size: 13px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #ddd;
+        }
+
+        .signup {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .signup a {
+            color: #2864e8;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .back-home {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-home a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        @media (max-width: 500px) {
+            .login-card {
+                padding: 25px 20px;
+            }
+
+            .brand h1 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <div class="brand">
+        <div class="brand-icon">🛍️</div>
+
+        <h1>AI Shopping Agent</h1>
+
+        <p>Find the right product with AI</p>
+    </div>
+
+
+    <div class="login-card">
+
+        <h2>Welcome Back 👋</h2>
+
+        <p class="login-subtitle">
+            Login to continue shopping
+        </p>
+
+
+        <div id="message" class="message"></div>
+
+
+        <!-- NAME -->
+
+        <div class="form-group">
+
+            <label for="name">
+                Your Name
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Enter your name"
+                autocomplete="name"
+            >
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+
+            <label for="email">
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                autocomplete="email"
+            >
+
+        </div>
+
+
+        <!-- PASSWORD -->
+
+        <div class="form-group">
+
+            <label for="password">
+                Password
+            </label>
+
+            <div class="password-wrapper">
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                >
+
+                <button
+                    type="button"
+                    class="password-toggle"
+                    onclick="togglePassword()"
+                    id="passwordToggle"
+                >
+                    👁️
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="options">
+
+            <label class="remember">
+
+                <input
+                    type="checkbox"
+                    id="remember"
+                >
+
+                Remember me
+
+            </label>
+
+            <span
+                class="forgot"
+                onclick="forgotPassword()"
+            >
+                Forgot Password?
+            </span>
+
+        </div>
+
+
+        <button
+            class="login-button"
+            onclick="login()"
+        >
+            🔐 Login
+        </button>
+
+
+        <div class="divider">
+            OR
+        </div>
+
+
+        <div class="signup">
+
+            Don't have an account?
+
+            <a onclick="createAccount()">
+                Create Account
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="back-home">
+
+        <a href="index.html">
+            ← Continue without login
+        </a>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function togglePassword() {
+
+    const password =
+        document.getElementById("password");
+
+    const toggle =
+        document.getElementById("passwordToggle");
+
+    if (password.type === "password") {
+
+        password.type = "text";
+
+        toggle.textContent = "🙈";
+
+    } else {
+
+        password.type = "password";
+
+        toggle.textContent = "👁️";
+
+    }
+}
+
+
+function login() {
+
+    const name =
+        document.getElementById("name")
+            .value.trim();
+
+    const email =
+        document.getElementById("email")
+            .value.trim();
+
+    const password =
+        document.getElementById("password")
+            .value.trim();
+
+    const message =
+        document.getElementById("message");
+
+
+    message.className = "message";
+
+
+    if (!name) {
+
+        message.textContent =
+            "Please enter your name.";
+
+        message.classList.add("error");
+
+        return;
+    }
+
+
+    if (!email) {
+
+        message.textContent =
+            "Please enter your email address.";
+
+        message.classList.add("error");
+
+        return;
+    }
+
+
+    if (!email.includes("@")) {
+
+        message.textContent =
+            "Please enter a valid email address.";
+
+        message.classList.add("error");
+
+        return;
+    }
+
+
+    if (!password) {
+
+        message.textContent =
+            "Please enter your password.";
+
+        message.classList.add("error");
+
+        return;
+    }
+
+
+    if (password.length < 6) {
+
+        message.textContent =
+            "Password must contain at least 6 characters.";
+
+        message.classList.add("error");
+
+        return;
+    }
+
+
+    /* SAVE USER DETAILS */
+
+    localStorage.setItem(
+        "isLoggedIn",
+        "true"
+    );
+
+    localStorage.setItem(
+        "userName",
+        name
+    );
+
+    localStorage.setItem(
+        "userEmail",
+        email
+    );
+
+
+    message.textContent =
+        "Login successful!";
+
+    message.classList.add("success");
+
+
+    setTimeout(function() {
+
+        window.location.href =
+            "index.html";
+
+    }, 500);
+
+}
+
+
+function forgotPassword() {
+
+    const message =
+        document.getElementById("message");
+
+    message.className = "message";
+
+    message.textContent =
+        "Password recovery will be added soon.";
+
+    message.classList.add("success");
+
+}
+
+
+function createAccount() {
+
+    const message =
+        document.getElementById("message");
+
+    message.className = "message";
+
+    message.textContent =
+        "Signup page will be added next.";
+
+    message.classList.add("success");
+
+}
+
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Enter") {
+
+            login();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
