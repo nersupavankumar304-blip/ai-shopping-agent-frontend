@@ -165,81 +165,42 @@
 </div>
 
 
+</div>
+
 <script>
-
-    /*
-     * =====================================================
-     * LOGIN CREDENTIALS
-     * =====================================================
-     *
-     * CHANGE THESE TWO VALUES TO YOUR REAL LOGIN DETAILS.
-     *
-     * IMPORTANT:
-     * This is only a frontend login.
-     * These credentials are NOT secure because they exist
-     * inside the browser's JavaScript source.
-     *
-     * For real security, use your backend/database.
-     */
-
-    const CORRECT_EMAIL = "nersupavankumar304@gmail.com";
-    const CORRECT_PASSWORD = "123456";
-
-
     const form = document.getElementById("loginForm");
-    const emailInput = document.getElementById("email");
-    const passwordInput = document.getElementById("password");
-    const message = document.getElementById("message");
-    const loginBtn = document.getElementById("loginBtn");
-
 
     form.addEventListener("submit", function(event) {
-
         event.preventDefault();
 
+        const email = document.getElementById("email").value.trim().toLowerCase();
+        const password = document.getElementById("password").value;
+        const message = document.getElementById("message");
 
-        // Get entered values
-        const email = emailInput.value.trim().toLowerCase();
-        const password = passwordInput.value;
-
-
-        // Clear previous message
         message.className = "";
         message.textContent = "";
 
-
-        // Basic validation
-        if (!email) {
-
-            message.textContent = "Please enter your email address.";
+        // Your login verification goes here
+        if (email !== correctEmail || password !== correctPassword) {
+            message.textContent = "Incorrect email or password.";
             message.className = "error";
-
             return;
         }
 
+        message.textContent = "Login successful!";
+        message.className = "success";
 
-        if (!password) {
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("userEmail", email);
 
-            message.textContent = "Please enter your password.";
-            message.className = "error";
+        setTimeout(function() {
+            window.location.href = "index.html";
+        }, 800);
+    });
+</script>
 
-            return;
-        }
-
-
-        // Validate email format
-        const emailPattern =
-            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if (!emailPattern.test(email)) {
-
-            message.textContent =
-                "Please enter a valid email address.";
-
-            message.className = "error";
-
-            return;
-        }
+</body>
+</html>
 
 
         /*
