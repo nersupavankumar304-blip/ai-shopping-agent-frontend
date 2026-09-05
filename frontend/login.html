@@ -62,3 +62,62 @@ function login() {
         window.location.href = "index.html";
     }, 800);
 }
+<script>
+function login() {
+    const email = document.getElementById("email").value.trim().toLowerCase();
+    const password = document.getElementById("password").value;
+    const message = document.getElementById("message");
+
+    message.className = "message";
+    message.textContent = "";
+
+    if (!email) {
+        message.textContent = "Please enter your email address.";
+        message.classList.add("error");
+        return;
+    }
+
+    if (!password) {
+        message.textContent = "Please enter your password.";
+        message.classList.add("error");
+        return;
+    }
+
+    const emailPattern =
+        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (!emailPattern.test(email)) {
+        message.textContent = "Please enter a valid email address.";
+        message.classList.add("error");
+        return;
+    }
+
+    if (password.length < 6) {
+        message.textContent =
+            "Password must contain at least 6 characters.";
+        message.classList.add("error");
+        return;
+    }
+
+    const validEmail = "demo@gmail.com";
+    const validPassword = "Demo@123";
+
+    if (email !== validEmail || password !== validPassword) {
+        message.textContent =
+            "Invalid email or password. Please check your credentials.";
+        message.classList.add("error");
+        return;
+    }
+
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("userEmail", email);
+
+    message.textContent =
+        "Login successful! Connecting to your account...";
+    message.classList.add("success");
+
+    setTimeout(function () {
+        window.location.href = "index.html";
+    }, 800);
+}
+</script>
