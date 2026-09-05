@@ -105,12 +105,6 @@
             color: #16803c;
         }
 
-        .info {
-            display: block !important;
-            background: #e8f0ff;
-            color: #3157a6;
-        }
-
         .security-note {
             margin-top: 20px;
             text-align: center;
@@ -159,83 +153,74 @@
     <div id="message"></div>
 
     <div class="security-note">
-        🔒 Please enter your registered email and password.
+        🔒 Enter your registered email and password.
     </div>
 
 </div>
 
-
-</div>
-
 <script>
+
+    // =====================================================
+    // YOUR LOGIN CREDENTIALS
+    // =====================================================
+    // CHANGE THESE TWO VALUES TO YOUR REAL LOGIN DETAILS.
+
+    const CORRECT_EMAIL = "your-email@gmail.com";
+    const CORRECT_PASSWORD = "YourPassword@123";
+
+
     const form = document.getElementById("loginForm");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const loginBtn = document.getElementById("loginBtn");
+    const message = document.getElementById("message");
+
 
     form.addEventListener("submit", function(event) {
+
         event.preventDefault();
 
-        const email = document.getElementById("email").value.trim().toLowerCase();
-        const password = document.getElementById("password").value;
-        const message = document.getElementById("message");
 
+        // Get entered details
+        const email = emailInput.value.trim().toLowerCase();
+        const password = passwordInput.value;
+
+
+        // Clear previous message
         message.className = "";
         message.textContent = "";
 
-        // Your login verification goes here
-        if (email !== correctEmail || password !== correctPassword) {
-            message.textContent = "Incorrect email or password.";
-            message.className = "error";
-            return;
-        }
 
-        message.textContent = "Login successful!";
-        message.className = "success";
-
-        localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("userEmail", email);
-
-        setTimeout(function() {
-            window.location.href = "index.html";
-        }, 800);
-    });
-</script>
-
-</body>
-</html>
-
-
-        /*
-         * =================================================
-         * IMPORTANT LOGIN CHECK
-         * =================================================
-         *
-         * BOTH email AND password must match.
-         */
+        // =====================================================
+        // CHECK EMAIL AND PASSWORD
+        // =====================================================
 
         if (
             email !== CORRECT_EMAIL.toLowerCase() ||
             password !== CORRECT_PASSWORD
         ) {
 
-            message.textContent =
-                "Incorrect email or password.";
-
+            message.textContent = "Incorrect email or password.";
             message.className = "error";
 
-            // Clear password
+            // Clear password after failed login
             passwordInput.value = "";
 
             return;
         }
 
 
-        // Login successful
+        // =====================================================
+        // LOGIN SUCCESSFUL
+        // =====================================================
+
         message.textContent =
             "Login successful! Opening AI Shopping Agent...";
 
         message.className = "success";
 
 
-        // Disable button to prevent multiple clicks
+        // Prevent multiple clicks
         loginBtn.disabled = true;
         loginBtn.textContent = "Logging in...";
 
