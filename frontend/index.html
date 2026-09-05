@@ -1,1830 +1,514 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-    <title>AI Shopping Agent</title>
+    <title>Login - AI Shopping Agent</title>
 
     <style>
-
-        /* =====================================================
-           RESET
-        ===================================================== */
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
+            font-family: Arial, sans-serif;
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f1f3f6;
-            color: #172033;
-        }
-
-
-        /* =====================================================
-           HEADER
-        ===================================================== */
-
-        header {
-            background: linear-gradient(
-                135deg,
-                #101a38,
-                #23479b
-            );
-
-            color: white;
-
-            min-height: 145px;
-
-            padding: 25px 45px;
-
+            min-height: 100vh;
+            background: linear-gradient(135deg, #101a38, #2856d9);
             display: flex;
-
-            justify-content: space-between;
-
-            align-items: center;
-
-            gap: 25px;
-        }
-
-        .header-left {
-            display: flex;
-
-            align-items: center;
-
-            gap: 18px;
-        }
-
-        .logo {
-            font-size: 52px;
-
-            line-height: 1;
-        }
-
-        .title-area h1 {
-            font-size: 40px;
-
-            margin: 0;
-
-            font-weight: 700;
-        }
-
-        .title-area p {
-            margin-top: 8px;
-
-            font-size: 19px;
-
-            color: #dbeafe;
-        }
-
-        .header-buttons {
-            display: flex;
-
-            gap: 12px;
-
-            align-items: center;
-        }
-
-        .header-button {
-            border: none;
-
-            background: white;
-
-            color: #111827;
-
-            padding: 14px 22px;
-
-            border-radius: 12px;
-
-            font-size: 16px;
-
-            font-weight: bold;
-
-            cursor: pointer;
-
-            transition: 0.2s;
-        }
-
-        .header-button:hover {
-            transform: translateY(-2px);
-
-            box-shadow:
-                0 6px 18px rgba(0,0,0,0.2);
-        }
-
-        .cart-count {
-            display: inline-flex;
-
             justify-content: center;
-
             align-items: center;
-
-            width: 24px;
-
-            height: 24px;
-
-            margin-left: 6px;
-
-            background: #ff3b30;
-
-            color: white;
-
-            border-radius: 50%;
-
-            font-size: 13px;
+            padding: 20px;
         }
 
-
-        /* =====================================================
-           NAVIGATION BAR
-        ===================================================== */
-
-        .store-nav {
-            background: #172337;
-
-            color: white;
-
-            min-height: 48px;
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 28px;
-
-            padding: 0 45px;
-
-            overflow-x: auto;
-
-            white-space: nowrap;
-        }
-
-        .store-nav span {
-            font-size: 14px;
-
-            font-weight: 600;
-
-            cursor: pointer;
-        }
-
-        .store-nav span:hover {
-            color: #93c5fd;
-        }
-
-
-        /* =====================================================
-           MAIN
-        ===================================================== */
-
-        main {
+        .login-container {
             width: 100%;
-
-            max-width: 1500px;
-
-            margin: 0 auto;
-
-            padding: 25px 30px 70px;
+            max-width: 430px;
         }
 
-
-        /* =====================================================
-           SEARCH
-        ===================================================== */
-
-        .search-container {
-            width: 100%;
-
-            display: flex;
-
-            gap: 12px;
-
+        .brand {
+            text-align: center;
+            color: white;
             margin-bottom: 25px;
         }
 
-        #searchInput {
-            flex: 1;
+        .brand-icon {
+            font-size: 50px;
+            margin-bottom: 8px;
+        }
 
-            height: 58px;
+        .brand h1 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
 
-            padding: 0 20px;
+        .brand p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
 
-            border: 2px solid #2563eb;
-
-            border-radius: 10px;
-
-            outline: none;
-
+        .login-card {
             background: white;
-
-            font-size: 17px;
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
         }
 
-        #searchInput:focus {
-            box-shadow:
-                0 0 0 4px rgba(37,99,235,0.12);
-        }
-
-        #searchButton {
-            width: 125px;
-
-            height: 58px;
-
-            border: none;
-
-            border-radius: 10px;
-
-            background: #2563eb;
-
-            color: white;
-
-            font-size: 17px;
-
-            font-weight: bold;
-
-            cursor: pointer;
-        }
-
-        #searchButton:hover {
-            background: #1d4ed8;
-        }
-
-        #searchButton:disabled {
-            opacity: 0.7;
-
-            cursor: wait;
-        }
-
-
-        /* =====================================================
-           AI ANSWER
-        ===================================================== */
-
-        #aiAnswer {
-            background: white;
-
-            border-radius: 14px;
-
-            padding: 20px 24px;
-
-            margin-bottom: 25px;
-
-            box-shadow:
-                0 3px 12px rgba(0,0,0,0.06);
-
-            border-left: 4px solid #2563eb;
-        }
-
-        #aiAnswer:empty {
-            display: none;
-        }
-
-        #aiAnswer h2 {
-            margin-bottom: 10px;
-
-            color: #2563eb;
-
-            font-size: 23px;
-        }
-
-        .recommendation-text {
-            line-height: 1.7;
-
-            font-size: 15px;
-        }
-
-        .recommendation-item {
-            background: #f8fafc;
-
-            padding: 12px;
-
-            margin: 8px 0;
-
-            border-radius: 8px;
-
-            font-weight: bold;
-        }
-
-        .recommendation-reason {
-            color: #4b5563;
-
-            padding: 5px 0 10px 15px;
-        }
-
-
-        /* =====================================================
-           HOME STORE SECTION
-        ===================================================== */
-
-        .home-section {
-            margin-top: 10px;
-        }
-
-        .home-heading {
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: center;
-
-            margin-bottom: 18px;
-        }
-
-        .home-heading h2 {
+        .login-card h2 {
+            text-align: center;
+            color: #17213c;
+            margin-bottom: 8px;
             font-size: 27px;
-
-            color: #111827;
         }
 
-        .home-heading p {
-            margin-top: 5px;
-
-            color: #64748b;
-
-            font-size: 15px;
-        }
-
-
-        /* =====================================================
-           PRODUCT GRID
-           
-           IMPORTANT:
-           4 PRODUCTS HORIZONTALLY
-        ===================================================== */
-
-        #products {
-            width: 100%;
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(4, minmax(0, 1fr));
-
-            gap: 20px;
-
-            align-items: stretch;
-        }
-
-
-        /* =====================================================
-           PRODUCT CARD
-        ===================================================== */
-
-        .product-card {
-            position: relative;
-
-            min-width: 0;
-
-            background: white;
-
-            border-radius: 14px;
-
-            padding: 16px;
-
-            border: 1px solid #e5e7eb;
-
-            box-shadow:
-                0 3px 12px rgba(0,0,0,0.07);
-
-            overflow: hidden;
-
-            display: flex;
-
-            flex-direction: column;
-
-            transition:
-                transform 0.2s ease,
-                box-shadow 0.2s ease;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-
-            box-shadow:
-                0 10px 25px rgba(0,0,0,0.13);
-        }
-
-
-        /* =====================================================
-           DISCOUNT
-        ===================================================== */
-
-        .discount-badge {
-            position: absolute;
-
-            top: 12px;
-
-            left: 12px;
-
-            z-index: 5;
-
-            background: #ef4444;
-
-            color: white;
-
-            padding: 6px 9px;
-
-            border-radius: 6px;
-
-            font-size: 12px;
-
-            font-weight: bold;
-        }
-
-
-        /* =====================================================
-           PRODUCT IMAGE
-        ===================================================== */
-
-        .product-image {
-            width: 100%;
-
-            height: 220px;
-
-            object-fit: contain;
-
-            display: block;
-
-            background: white;
-
-            margin-bottom: 10px;
-        }
-
-
-        /* =====================================================
-           PRODUCT NAME
-        ===================================================== */
-
-        .product-card h3 {
-            font-size: 18px;
-
-            line-height: 1.3;
-
-            color: #111827;
-
-            margin: 7px 0;
-        }
-
-
-        /* =====================================================
-           CATEGORY
-        ===================================================== */
-
-        .category {
-            display: inline-block;
-
-            width: fit-content;
-
-            background: #eff6ff;
-
-            color: #2563eb;
-
-            padding: 5px 9px;
-
-            border-radius: 20px;
-
-            font-size: 12px;
-
-            font-weight: bold;
-
-            text-transform: capitalize;
-
-            margin-bottom: 8px;
-        }
-
-
-        /* =====================================================
-           RATING
-        ===================================================== */
-
-        .rating {
-            color: #111827;
-
+        .login-subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 28px;
             font-size: 14px;
-
-            font-weight: bold;
-
-            margin: 5px 0 8px;
         }
 
-        .review-count {
-            color: #6b7280;
-
-            font-size: 12px;
-
-            font-weight: normal;
-        }
-
-
-        /* =====================================================
-           PRICE
-        ===================================================== */
-
-        .price-section {
-            display: flex;
-
-            align-items: center;
-
-            gap: 9px;
-
-            margin: 5px 0 10px;
-        }
-
-        .old-price {
-            color: #9ca3af;
-
-            text-decoration: line-through;
-
-            font-size: 13px;
-        }
-
-        .price {
-            color: #16a34a;
-
-            font-size: 22px;
-
-            font-weight: bold;
-        }
-
-
-        /* =====================================================
-           DESCRIPTION
-        ===================================================== */
-
-        .product-card p {
-            color: #4b5563;
-
-            font-size: 13px;
-
-            line-height: 1.5;
-
-            margin-bottom: 8px;
-        }
-
-
-        /* =====================================================
-           FEATURES
-        ===================================================== */
-
-        .product-card strong {
-            color: #111827;
-
-            font-size: 14px;
-
-            margin-top: 8px;
-
-            margin-bottom: 5px;
-        }
-
-        .product-card ul {
-            padding-left: 18px;
-
-            margin-bottom: 12px;
-
-            color: #4b5563;
-
-            font-size: 13px;
-
-            line-height: 1.5;
-        }
-
-        .product-card li {
-            margin-bottom: 2px;
-        }
-
-
-        /* =====================================================
-           BUTTONS
-        ===================================================== */
-
-        .card-buttons {
-            display: flex;
-
-            gap: 7px;
-
-            margin-top: auto;
-
-            padding-top: 8px;
-        }
-
-        .buy-button,
-        .add-cart-button {
-            flex: 1;
-
-            min-width: 0;
-
-            border: none;
-
-            padding: 11px 8px;
-
-            border-radius: 8px;
-
-            font-size: 13px;
-
-            font-weight: bold;
-
-            text-align: center;
-
-            cursor: pointer;
-
-            text-decoration: none;
-        }
-
-        .buy-button {
-            background: #2563eb;
-
-            color: white;
-        }
-
-        .buy-button:hover {
-            background: #1d4ed8;
-        }
-
-        .add-cart-button {
-            background: #111827;
-
-            color: white;
-        }
-
-        .add-cart-button:hover {
-            background: #374151;
-        }
-
-
-        /* =====================================================
-           LOADING
-        ===================================================== */
-
-        .loading {
-            grid-column: 1 / -1;
-
-            text-align: center;
-
-            padding: 50px;
-
-            color: #2563eb;
-
-            font-size: 18px;
-        }
-
-        .loading-spinner {
-            width: 32px;
-
-            height: 32px;
-
-            border: 4px solid #dbeafe;
-
-            border-top: 4px solid #2563eb;
-
-            border-radius: 50%;
-
-            animation: spin 0.8s linear infinite;
-
-            margin: 0 auto 12px;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-
-        /* =====================================================
-           ERROR
-        ===================================================== */
-
-        .error {
-            grid-column: 1 / -1;
-
-            background: #fee2e2;
-
-            color: #991b1b;
-
-            padding: 20px;
-
-            border-radius: 12px;
-
-            text-align: center;
-        }
-
-
-        /* =====================================================
-           MODALS
-        ===================================================== */
-
-        .modal {
-            display: none;
-
-            position: fixed;
-
-            inset: 0;
-
-            background: rgba(0,0,0,0.60);
-
-            z-index: 9999;
-
-            justify-content: center;
-
-            align-items: center;
-
-            padding: 20px;
-        }
-
-        .modal.show {
-            display: flex;
-        }
-
-        .modal-box {
-            width: 100%;
-
-            max-width: 600px;
-
-            max-height: 88vh;
-
-            overflow-y: auto;
-
-            background: white;
-
-            border-radius: 18px;
-
-            padding: 25px;
-
-            box-shadow:
-                0 20px 60px rgba(0,0,0,0.3);
-        }
-
-        .modal-header {
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: center;
-
-            border-bottom: 1px solid #e5e7eb;
-
-            padding-bottom: 15px;
-
-            margin-bottom: 15px;
-        }
-
-        .modal-header h2 {
-            margin: 0;
-
-            font-size: 22px;
-        }
-
-        .close-button {
-            border: none;
-
-            background: #f3f4f6;
-
-            width: 38px;
-
-            height: 38px;
-
-            border-radius: 50%;
-
-            font-size: 21px;
-
-            cursor: pointer;
-        }
-
-        .close-button:hover {
-            background: #e5e7eb;
-        }
-
-
-        /* =====================================================
-           CART
-        ===================================================== */
-
-        .cart-item {
-            display: grid;
-
-            grid-template-columns: 70px 1fr auto;
-
-            gap: 14px;
-
-            align-items: center;
-
-            padding: 16px 0;
-
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .cart-item img {
-            width: 65px;
-
-            height: 65px;
-
-            object-fit: contain;
-
-            border-radius: 8px;
-        }
-
-        .cart-item-info h4 {
-            margin-bottom: 6px;
-
-            font-size: 15px;
-        }
-
-        .cart-item-price {
-            color: #16a34a;
-
-            font-weight: bold;
-
-            margin-bottom: 8px;
-        }
-
-        .quantity-controls {
-            display: flex;
-
-            align-items: center;
-
-            gap: 7px;
-        }
-
-        .quantity-button {
-            width: 30px;
-
-            height: 30px;
-
-            border: 1px solid #d1d5db;
-
-            background: #f9fafb;
-
-            border-radius: 7px;
-
-            font-size: 17px;
-
-            font-weight: bold;
-
-            cursor: pointer;
-        }
-
-        .quantity-value {
-            min-width: 25px;
-
-            text-align: center;
-
-            font-weight: bold;
-        }
-
-        .remove-cart {
-            border: none;
-
-            background: #fee2e2;
-
-            color: #dc2626;
-
-            padding: 8px 10px;
-
-            border-radius: 7px;
-
-            cursor: pointer;
-
-            font-weight: bold;
-        }
-
-        .cart-summary {
-            margin-top: 20px;
-
-            padding-top: 15px;
-
-            border-top: 1px solid #e5e7eb;
-        }
-
-        .summary-row {
-            display: flex;
-
-            justify-content: space-between;
-
-            margin: 8px 0;
-
-            color: #4b5563;
-        }
-
-        .summary-row.total {
-            color: #111827;
-
-            font-size: 20px;
-
-            font-weight: bold;
-
-            margin-top: 15px;
-        }
-
-        .proceed-button {
-            width: 100%;
-
-            margin-top: 18px;
-
-            border: none;
-
-            padding: 14px;
-
-            border-radius: 10px;
-
-            background: #16a34a;
-
-            color: white;
-
-            font-size: 16px;
-
-            font-weight: bold;
-
-            cursor: pointer;
-        }
-
-        .proceed-button:hover {
-            background: #15803d;
-        }
-
-        .empty-cart {
-            text-align: center;
-
-            padding: 40px 10px;
-
-            color: #6b7280;
-        }
-
-
-        /* =====================================================
-           PROFILE
-        ===================================================== */
-
-        .profile-content {
-            padding: 10px;
-        }
-
-        .profile-top {
-            text-align: center;
-
-            padding: 15px 0 20px;
-
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .profile-icon {
-            font-size: 55px;
-        }
-
-        .profile-top h3 {
-            margin-top: 8px;
-        }
-
-        .profile-top p {
-            color: #6b7280;
-
-            margin-top: 5px;
-
-            word-break: break-word;
-        }
-
-        .profile-menu-button {
-            width: 100%;
-
-            border: none;
-
-            background: #f8fafc;
-
-            padding: 13px;
-
-            margin-top: 9px;
-
-            border-radius: 10px;
-
-            text-align: left;
-
-            font-size: 15px;
-
-            cursor: pointer;
-        }
-
-        .profile-menu-button:hover {
-            background: #eef2ff;
-        }
-
-        .profile-logout {
-            color: #dc2626;
-
-            font-weight: bold;
-        }
-
-
-        /* =====================================================
-           CHECKOUT
-        ===================================================== */
-
-        .checkout-box {
-            width: 100%;
-
-            max-width: 700px;
-
-            max-height: 90vh;
-
-            overflow-y: auto;
-
-            background: white;
-
-            border-radius: 18px;
-
-            padding: 25px;
-        }
-
-        .checkout-field {
+        .form-group {
             margin-bottom: 18px;
         }
 
-        .checkout-field label {
+        .form-group label {
             display: block;
-
+            margin-bottom: 8px;
             font-weight: bold;
-
-            margin-bottom: 7px;
+            color: #333;
+            font-size: 14px;
         }
 
-        .checkout-field input,
-        .checkout-field textarea {
+        .form-group input {
             width: 100%;
-
-            padding: 12px;
-
-            border: 1px solid #d1d5db;
-
-            border-radius: 9px;
-
-            font-size: 15px;
-
-            font-family: inherit;
-
+            padding: 14px;
+            border: 1px solid #d5d9e2;
+            border-radius: 10px;
             outline: none;
+            font-size: 15px;
         }
 
-        .checkout-field input:focus,
-        .checkout-field textarea:focus {
-            border-color: #2563eb;
+        .form-group input:focus {
+            border-color: #2864e8;
+            box-shadow: 0 0 0 3px rgba(40,100,232,0.1);
         }
 
-        .checkout-field textarea {
-            min-height: 85px;
-
-            resize: vertical;
+        .password-wrapper {
+            position: relative;
         }
 
-        .payment-options {
-            display: grid;
-
-            gap: 10px;
-
-            margin-top: 10px;
+        .password-wrapper input {
+            padding-right: 50px;
         }
 
-        .payment-option {
-            display: flex;
-
-            align-items: center;
-
-            gap: 10px;
-
-            border: 1px solid #d1d5db;
-
-            border-radius: 10px;
-
-            padding: 13px;
-
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
             cursor: pointer;
+            font-size: 18px;
         }
 
-        .checkout-total {
-            background: #f8fafc;
-
-            border-radius: 12px;
-
-            padding: 16px;
-
-            margin: 20px 0;
-        }
-
-        .checkout-total-row {
+        .options {
             display: flex;
-
             justify-content: space-between;
-
-            margin: 8px 0;
+            align-items: center;
+            margin-bottom: 22px;
+            font-size: 14px;
         }
 
-        .checkout-total-row.final {
-            border-top: 1px solid #e5e7eb;
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: #555;
+        }
 
-            padding-top: 12px;
-
-            margin-top: 12px;
-
-            font-size: 20px;
-
+        .forgot {
+            color: #2864e8;
             font-weight: bold;
+            cursor: pointer;
         }
 
-        .place-order-button {
+        .login-button {
             width: 100%;
-
             border: none;
-
-            background: #16a34a;
-
+            background: #2864e8;
             color: white;
-
-            padding: 15px;
-
-            border-radius: 11px;
-
-            font-size: 17px;
-
-            font-weight: bold;
-
-            cursor: pointer;
-        }
-
-        .place-order-button:hover {
-            background: #15803d;
-        }
-
-        .back-cart-button {
-            width: 100%;
-
-            margin-top: 10px;
-
-            border: none;
-
-            background: #eef2ff;
-
-            color: #1d4ed8;
-
-            padding: 13px;
-
+            padding: 14px;
             border-radius: 10px;
-
+            font-size: 17px;
             font-weight: bold;
-
             cursor: pointer;
         }
 
-        .payment-note {
-            color: #6b7280;
+        .login-button:hover {
+            background: #1e4fc2;
+        }
 
+        .message {
+            display: none;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 18px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .message.success {
+            display: block;
+            background: #e8f7ee;
+            color: #18733b;
+        }
+
+        .message.error {
+            display: block;
+            background: #fdeaea;
+            color: #b42318;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 25px 0;
+            color: #999;
             font-size: 13px;
-
-            margin-top: 8px;
         }
 
-
-        /* =====================================================
-           RESPONSIVE
-        ===================================================== */
-
-        /* 3 PRODUCTS */
-        @media (max-width: 1150px) {
-
-            #products {
-                grid-template-columns:
-                    repeat(3, minmax(0, 1fr));
-            }
-
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #ddd;
         }
 
-
-        /* 2 PRODUCTS */
-        @media (max-width: 850px) {
-
-            header {
-                padding: 22px 25px;
-            }
-
-            .title-area h1 {
-                font-size: 32px;
-            }
-
-            main {
-                padding: 22px 20px 50px;
-            }
-
-            #products {
-                grid-template-columns:
-                    repeat(2, minmax(0, 1fr));
-            }
-
-            .product-image {
-                height: 210px;
-            }
-
+        .signup {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
         }
 
-
-        /* MOBILE */
-        @media (max-width: 600px) {
-
-            header {
-                flex-direction: column;
-
-                align-items: flex-start;
-
-                padding: 22px 18px;
-            }
-
-            .header-left {
-                width: 100%;
-            }
-
-            .logo {
-                font-size: 42px;
-            }
-
-            .title-area h1 {
-                font-size: 28px;
-            }
-
-            .title-area p {
-                font-size: 15px;
-            }
-
-            .header-buttons {
-                width: 100%;
-            }
-
-            .header-button {
-                flex: 1;
-            }
-
-            .store-nav {
-                padding: 0 18px;
-
-                gap: 20px;
-            }
-
-            main {
-                padding: 18px 12px 40px;
-            }
-
-            .search-container {
-                flex-direction: column;
-            }
-
-            #searchInput {
-                width: 100%;
-
-                height: 54px;
-            }
-
-            #searchButton {
-                width: 100%;
-
-                height: 54px;
-            }
-
-            #products {
-                grid-template-columns: 1fr;
-
-                gap: 16px;
-            }
-
-            .product-image {
-                height: 230px;
-            }
-
-            .cart-item {
-                grid-template-columns:
-                    55px 1fr;
-            }
-
-            .cart-item img {
-                width: 52px;
-
-                height: 52px;
-            }
-
-            .remove-cart {
-                grid-column: 2;
-
-                width: fit-content;
-            }
-
+        .signup a {
+            color: #2864e8;
+            font-weight: bold;
+            cursor: pointer;
         }
 
+        .back-home {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-home a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        @media (max-width: 500px) {
+            .login-card {
+                padding: 25px 20px;
+            }
+
+            .brand h1 {
+                font-size: 25px;
+            }
+        }
     </style>
 </head>
 
-
 <body>
 
-    <script>
-        if (localStorage.getItem("isLoggedIn") !== "true") {
-            window.location.href = "login.html";
-        }
-    </script>
+<div class="login-container">
+
+    <div class="brand">
+        <div class="brand-icon">🛍️</div>
+
+        <h1>AI Shopping Agent</h1>
+
+        <p>Find the right product with AI</p>
+    </div>
 
 
-    <!-- =====================================================
-         HEADER
-    ===================================================== -->
+    <div class="login-card">
 
-    <header>
+        <h2>Welcome Back 👋</h2>
 
-        <div class="header-left">
-
-            <div class="logo">
-                🛍️
-            </div>
-
-            <div class="title-area">
-
-                <h1>
-                    AI Shopping Agent
-                </h1>
-
-                <p>
-                    Find the right product with AI
-                </p>
-
-            </div>
-
-        </div>
+        <p class="login-subtitle">
+            Login to continue shopping
+        </p>
 
 
-        <div class="header-buttons">
-
-            <button
-                class="header-button"
-                onclick="openCart()"
-            >
-                🛒 Cart
-
-                <span
-                    id="cartCount"
-                    class="cart-count"
-                >
-                    0
-                </span>
-
-            </button>
+        <div id="message" class="message"></div>
 
 
-            <button
-                class="header-button"
-                onclick="openProfile()"
-            >
-                👤 Profile
-            </button>
+        <!-- NAME -->
 
-        </div>
+        <div class="form-group">
 
-    </header>
-
-
-    <!-- =====================================================
-         STORE NAVIGATION
-    ===================================================== -->
-
-    <nav class="store-nav">
-
-        <span>☰ All</span>
-
-        <span>Electronics</span>
-
-        <span>Headphones</span>
-
-        <span>Earbuds</span>
-
-        <span>Keyboards</span>
-
-        <span>Mouse</span>
-
-        <span>Accessories</span>
-
-        <span>Best Deals</span>
-
-        <span>Top Products</span>
-
-    </nav>
-
-
-    <!-- =====================================================
-         MAIN
-    ===================================================== -->
-
-    <main>
-
-
-        <!-- SEARCH -->
-
-        <div class="search-container">
+            <label for="name">
+                Your Name
+            </label>
 
             <input
-                id="searchInput"
                 type="text"
-                placeholder="Search for headphones, mouse, keyboard..."
-                autocomplete="off"
+                id="name"
+                placeholder="Enter your name"
+                autocomplete="name"
             >
 
-            <button
-                id="searchButton"
-                type="button"
-                onclick="searchProducts()"
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+
+            <label for="email">
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                autocomplete="email"
             >
-                Search
-            </button>
 
         </div>
 
 
-        <!-- AI ANSWER -->
+        <!-- PASSWORD -->
 
-        <div id="aiAnswer"></div>
+        <div class="form-group">
 
+            <label for="password">
+                Password
+            </label>
 
-        <!-- =================================================
-             HOME PRODUCT SECTION
-        ================================================= -->
-
-        <section class="home-section">
-
-            <div class="home-heading">
-
-                <div>
-
-                    <h2>
-                        🛍️ All Products
-                    </h2>
-
-                    <p>
-                        Explore our products
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <!--
-                YOUR script.js WILL LOAD ALL PRODUCTS HERE.
-
-                Desktop:
-                4 products per row
-
-                Medium:
-                3 products per row
-
-                Tablet:
-                2 products per row
-
-                Mobile:
-                1 product per row
-            -->
-
-            <div id="products"></div>
-
-        </section>
-
-    </main>
-
-
-    <!-- =====================================================
-         CART MODAL
-    ===================================================== -->
-
-    <div
-        id="cartModal"
-        class="modal"
-        onclick="closeCartOutside(event)"
-    >
-
-        <div class="modal-box">
-
-            <div class="modal-header">
-
-                <h2>
-                    🛒 Your Cart
-                </h2>
-
-                <button
-                    class="close-button"
-                    onclick="closeCart()"
-                >
-                    ×
-                </button>
-
-            </div>
-
-
-            <div id="cartItems"></div>
-
-
-            <div
-                id="cartTotal"
-            ></div>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         PROFILE MODAL
-    ===================================================== -->
-
-    <div
-        id="profileModal"
-        class="modal"
-        onclick="closeProfileOutside(event)"
-    >
-
-        <div class="modal-box">
-
-            <div class="modal-header">
-
-                <h2>
-                    👤 My Profile
-                </h2>
-
-                <button
-                    class="close-button"
-                    onclick="closeProfile()"
-                >
-                    ×
-                </button>
-
-            </div>
-
-
-            <div class="profile-content">
-
-                <div class="profile-top">
-
-                    <div class="profile-icon">
-                        👤
-                    </div>
-
-                    <h3 id="profileName">
-                        Shopping User
-                    </h3>
-
-                    <p id="profileEmail">
-                        Loading...
-                    </p>
-
-                </div>
-
-
-                <button
-                    class="profile-menu-button"
-                    onclick="openCart(); closeProfile();"
-                >
-                    🛒 My Cart
-                </button>
-
-
-                <button
-                    class="profile-menu-button"
-                    onclick="openOrders(); closeProfile();"
-                >
-                    📦 My Orders
-                </button>
-
-
-                <button
-                    class="profile-menu-button"
-                    onclick="showComingSoon('Wishlist')"
-                >
-                    ❤️ Wishlist
-                </button>
-
-
-                <button
-                    class="profile-menu-button"
-                    onclick="showComingSoon('Settings')"
-                >
-                    ⚙️ Settings
-                </button>
-
-
-                <button
-                    class="profile-menu-button profile-logout"
-                    onclick="logout()"
-                >
-                    🚪 Logout
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         CHECKOUT / PAYMENT MODAL
-    ===================================================== -->
-
-    <div
-        id="checkoutModal"
-        class="modal"
-        onclick="closeCheckoutOutside(event)"
-    >
-
-        <div class="checkout-box">
-
-
-            <div class="modal-header">
-
-                <h2>
-                    💳 Checkout & Payment
-                </h2>
-
-                <button
-                    class="close-button"
-                    onclick="closeCheckout()"
-                >
-                    ×
-                </button>
-
-            </div>
-
-
-            <!-- NAME -->
-
-            <div class="checkout-field">
-
-                <label for="checkoutName">
-                    Full Name
-                </label>
+            <div class="password-wrapper">
 
                 <input
-                    id="checkoutName"
-                    type="text"
-                    placeholder="Enter your full name"
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
                 >
+
+                <button
+                    type="button"
+                    class="password-toggle"
+                    onclick="togglePassword()"
+                    id="passwordToggle"
+                >
+                    👁️
+                </button>
 
             </div>
 
+        </div>
 
-            <!-- PHONE -->
 
-            <div class="checkout-field">
+        <div class="options">
 
-                <label for="checkoutPhone">
-                    Mobile Number
-                </label>
+            <label class="remember">
 
                 <input
-                    id="checkoutPhone"
-                    type="tel"
-                    maxlength="10"
-                    placeholder="Enter your 10-digit mobile number"
+                    type="checkbox"
+                    id="remember"
                 >
 
-            </div>
+                Remember me
 
+            </label>
 
-            <!-- ADDRESS -->
-
-            <div class="checkout-field">
-
-                <label for="checkoutAddress">
-                    Delivery Address
-                </label>
-
-                <textarea
-                    id="checkoutAddress"
-                    placeholder="House/flat, street, city, state, PIN code"
-                ></textarea>
-
-            </div>
-
-
-            <!-- PAYMENT -->
-
-            <div class="checkout-field">
-
-                <label>
-                    Payment Method
-                </label>
-
-
-                <div class="payment-options">
-
-
-                    <label class="payment-option">
-
-                        <input
-                            type="radio"
-                            name="paymentMethod"
-                            value="upi"
-                            checked
-                        >
-
-                        <span>
-                            📱 UPI
-                        </span>
-
-                    </label>
-
-
-                    <label class="payment-option">
-
-                        <input
-                            type="radio"
-                            name="paymentMethod"
-                            value="card"
-                        >
-
-                        <span>
-                            💳 Credit / Debit Card
-                        </span>
-
-                    </label>
-
-
-                    <label class="payment-option">
-
-                        <input
-                            type="radio"
-                            name="paymentMethod"
-                            value="cod"
-                        >
-
-                        <span>
-                            💵 Cash on Delivery
-                        </span>
-
-                    </label>
-
-
-                </div>
-
-
-                <div class="payment-note">
-                    Demo payment mode — no real money is charged.
-                </div>
-
-            </div>
-
-
-            <!-- CHECKOUT TOTAL -->
-
-            <div
-                id="checkoutSummary"
-                class="checkout-total"
-            ></div>
-
-
-            <!-- PLACE ORDER -->
-
-            <button
-                class="place-order-button"
-                onclick="placeOrder()"
+            <span
+                class="forgot"
+                onclick="forgotPassword()"
             >
-                ✅ Place Order
-            </button>
+                Forgot Password?
+            </span>
+
+        </div>
 
 
-            <!-- BACK -->
+        <button
+            class="login-button"
+            onclick="login()"
+        >
+            🔐 Login
+        </button>
 
-            <button
-                class="back-cart-button"
-                onclick="closeCheckout(); openCart();"
-            >
-                ← Back to Cart
-            </button>
 
+        <div class="divider">
+            OR
+        </div>
+
+
+        <div class="signup">
+
+            Don't have an account?
+
+            <a onclick="createAccount()">
+                Create Account
+            </a>
 
         </div>
 
     </div>
 
 
-    <!-- =====================================================
-         YOUR EXISTING SCRIPT
-         
-         IMPORTANT:
-         Keep script.js in:
-         
-         frontend/script.js
-    ===================================================== -->
+    <div class="back-home">
 
-    <script src="script.js"></script>
+        <a href="index.html">
+            ← Continue without login
+        </a>
 
+    </div>
+
+</div>
+
+
+<script>
+
+function togglePassword() {
+
+    const password =
+        document.getElementById("password");
+
+    const toggle =
+        document.getElementById("passwordToggle");
+
+    if (password.type === "password") {
+
+        password.type = "text";
+
+        toggle.textContent = "🙈";
+
+    } else {
+
+        password.type = "password";
+
+        toggle.textContent = "👁️";
+
+    }
+}
+
+
+function login() {
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim().toLowerCase();
+    const password = document.getElementById("password").value.trim();
+    const message = document.getElementById("message");
+
+    message.className = "message";
+    message.textContent = "";
+
+    if (!name) {
+        message.textContent = "Please enter your name.";
+        message.classList.add("error");
+        return;
+    }
+
+    if (!email) {
+        message.textContent = "Please enter your email address.";
+        message.classList.add("error");
+        return;
+    }
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+        message.textContent = "Please enter a valid email address.";
+        message.classList.add("error");
+        return;
+    }
+
+    if (!password) {
+        message.textContent = "Please enter your password.";
+        message.classList.add("error");
+        return;
+    }
+
+    if (password.length < 6) {
+        message.textContent = "Password must contain at least 6 characters.";
+        message.classList.add("error");
+        return;
+    }
+
+    // Replace these with the credentials you want to use.
+    const correctEmail = "YOUR_EMAIL@gmail.com";
+    const correctPassword = "YOUR_PASSWORD";
+
+    if (email !== correctEmail || password !== correctPassword) {
+        message.textContent = "Incorrect email or password.";
+        message.classList.add("error");
+        return;
+    }
+
+    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem("userName", name);
+    localStorage.setItem("userEmail", email);
+
+    message.textContent = "Login successful!";
+    message.classList.add("success");
+
+    setTimeout(function() {
+        window.location.href = "index.html";
+    }, 500);
+}
+
+function forgotPassword() {
+
+    const message =
+        document.getElementById("message");
+
+    message.className = "message";
+
+    message.textContent =
+        "Password recovery will be added soon.";
+
+    message.classList.add("success");
+
+}
+
+
+function createAccount() {
+
+    const message =
+        document.getElementById("message");
+
+    message.className = "message";
+
+    message.textContent =
+        "Signup page will be added next.";
+
+    message.classList.add("success");
+
+}
+
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Enter") {
+
+            login();
+
+        }
+
+    }
+);
+
+</script>
 
 </body>
-
 </html>
