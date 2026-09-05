@@ -1375,6 +1375,20 @@ function getLocalProducts() {
     ];
 }
 
+function logout() {
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userEmail");
+    localStorage.removeItem("userName");
+    window.location.href = "login.html";
+}
+
+function clearUserData() {
+    if (confirm("Are you sure you want to reset your local account & data and log out?")) {
+        localStorage.clear();
+        window.location.href = "login.html";
+    }
+}
+
 // Make functions available globally for inline handlers
 window.updateQuantity = updateQuantity;
 window.removeFromCart = removeFromCart;
@@ -1383,4 +1397,5 @@ window.closeModal = closeModal;
 window.startPayment = startPayment;
 window.toggleDarkMode = toggleDarkMode;
 window.clearUserData = clearUserData;
+window.logout = logout;
 window.checkout = checkout;

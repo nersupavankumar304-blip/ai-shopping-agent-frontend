@@ -880,6 +880,57 @@ def save_profile(
 
 
 # ============================================================
+# USER AUTHENTICATION & LOGIN
+# ============================================================
+
+class LoginRequest(BaseModel):
+    name: Optional[str] = "Demo User"
+    email: str
+    password: str
+
+
+@app.post("/login")
+def login(data: LoginRequest):
+    email = data.email.strip().lower()
+    password = data.password.strip()
+    name = (data.name or "").strip() or "Demo User"
+
+    if not email or not password:
+        raise HTTPException(
+            status_code=400,
+            detail="Email and password are required"
+        )
+
+    # Demo credentials match
+    is_demo = (
+        email in ["demo@example.com", "demologin", "demo@shopping.com", "demologin@example.com"]
+        or password == "demologin"
+    )
+
+    if is_demo:
+        name = "Demo User" if name == "Demo User" or not name else name
+        return {
+            "success": True,
+            "message": "Demo login successful!",
+            "user": {
+                "name": name,
+                "email": "demo@example.com" if email == "demologin" else email,
+                "is_demo": True
+            }
+        }
+
+    return {
+        "success": True,
+        "message": "Login successful!",
+        "user": {
+            "name": name,
+            "email": email,
+            "is_demo": False
+        }
+    }
+
+
+# ============================================================
 # STARTUP INFORMATION
 # ============================================================
 

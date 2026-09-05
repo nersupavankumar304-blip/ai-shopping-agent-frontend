@@ -4,511 +4,715 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Login - AI Shopping Agent</title>
+    <title>AI Shopping Agent</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #101a38, #2856d9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .login-container {
-            width: 100%;
-            max-width: 430px;
-        }
-
-        .brand {
-            text-align: center;
-            color: white;
-            margin-bottom: 25px;
-        }
-
-        .brand-icon {
-            font-size: 50px;
-            margin-bottom: 8px;
-        }
-
-        .brand h1 {
-            font-size: 30px;
-            margin-bottom: 8px;
-        }
-
-        .brand p {
-            font-size: 16px;
-            opacity: 0.9;
-        }
-
-        .login-card {
-            background: white;
-            border-radius: 18px;
-            padding: 35px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
-        }
-
-        .login-card h2 {
-            text-align: center;
-            color: #17213c;
-            margin-bottom: 8px;
-            font-size: 27px;
-        }
-
-        .login-subtitle {
-            text-align: center;
-            color: #777;
-            margin-bottom: 28px;
-            font-size: 14px;
-        }
-
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #333;
-            font-size: 14px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid #d5d9e2;
-            border-radius: 10px;
-            outline: none;
-            font-size: 15px;
-        }
-
-        .form-group input:focus {
-            border-color: #2864e8;
-            box-shadow: 0 0 0 3px rgba(40,100,232,0.1);
-        }
-
-        .password-wrapper {
-            position: relative;
-        }
-
-        .password-wrapper input {
-            padding-right: 50px;
-        }
-
-        .password-toggle {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            border: none;
-            background: transparent;
-            cursor: pointer;
-            font-size: 18px;
-        }
-
-        .options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 22px;
-            font-size: 14px;
-        }
-
-        .remember {
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            color: #555;
-        }
-
-        .forgot {
-            color: #2864e8;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .login-button {
-            width: 100%;
-            border: none;
-            background: #2864e8;
-            color: white;
-            padding: 14px;
-            border-radius: 10px;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .login-button:hover {
-            background: #1e4fc2;
-        }
-
-        .message {
-            display: none;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 18px;
-            text-align: center;
-            font-size: 14px;
-        }
-
-        .message.success {
-            display: block;
-            background: #e8f7ee;
-            color: #18733b;
-        }
-
-        .message.error {
-            display: block;
-            background: #fdeaea;
-            color: #b42318;
-        }
-
-        .divider {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin: 25px 0;
-            color: #999;
-            font-size: 13px;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: #ddd;
-        }
-
-        .signup {
-            text-align: center;
-            color: #666;
-            font-size: 14px;
-        }
-
-        .signup a {
-            color: #2864e8;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .back-home {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .back-home a {
-            color: white;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        @media (max-width: 500px) {
-            .login-card {
-                padding: 25px 20px;
-            }
-
-            .brand h1 {
-                font-size: 25px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <script>
+if (localStorage.getItem("isLoggedIn") !== "true") {
+    window.location.href = "login.html";
+}
+</script>
 
-<div class="login-container">
+    <!-- ================= HEADER ================= -->
 
-    <div class="brand">
-        <div class="brand-icon">🛍️</div>
+    <header class="main-header">
 
-        <h1>AI Shopping Agent</h1>
+        <div class="header-left">
 
-        <p>Find the right product with AI</p>
-    </div>
+            <div class="logo">🛍️</div>
 
-
-    <div class="login-card">
-
-        <h2>Welcome Back 👋</h2>
-
-        <p class="login-subtitle">
-            Login to continue shopping
-        </p>
-
-
-        <div id="message" class="message"></div>
-
-
-        <!-- NAME -->
-
-        <div class="form-group">
-
-            <label for="name">
-                Your Name
-            </label>
-
-            <input
-                type="text"
-                id="name"
-                placeholder="Enter your name"
-                autocomplete="name"
-            >
+            <div>
+                <h1>AI Shopping Agent</h1>
+                <p>Find the right product with AI</p>
+            </div>
 
         </div>
 
+        <div class="header-actions">
 
-        <!-- EMAIL -->
-
-        <div class="form-group">
-
-            <label for="email">
-                Email Address
-            </label>
-
-            <input
-                type="email"
-                id="email"
-                placeholder="Enter your email"
-                autocomplete="email"
+            <button
+                id="cartButton"
+                class="header-button"
+                type="button"
             >
+                🛒 Cart
+                <span id="cartCount">0</span>
+            </button>
+
+            <button
+                id="profileButton"
+                class="header-button"
+                type="button"
+            >
+                👤 Profile
+            </button>
 
         </div>
 
+    </header>
 
-        <!-- PASSWORD -->
 
-        <div class="form-group">
+    <!-- ================= NAVIGATION ================= -->
 
-            <label for="password">
-                Password
-            </label>
+    <nav class="navbar">
 
-            <div class="password-wrapper">
+        <button
+            class="nav-item active"
+            data-category="all"
+            type="button"
+        >
+            ☰ All
+        </button>
+
+        <button
+            class="nav-item"
+            data-category="electronics"
+            type="button"
+        >
+            Electronics
+        </button>
+
+        <button
+            class="nav-item"
+            data-category="laptops"
+            type="button"
+        >
+            💻 Laptops
+        </button>
+
+        <button
+            class="nav-item"
+            data-category="headphones"
+            type="button"
+        >
+            Headphones
+        </button>
+
+        <button
+            class="nav-item"
+            data-category="earbuds"
+            type="button"
+        >
+            Earbuds
+        </button>
+
+        <button
+            class="nav-item"
+            data-category="keyboards"
+            type="button"
+        >
+            Keyboards
+        </button>
+
+        <button
+            class="nav-item"
+            data-category="mouse"
+            type="button"
+        >
+            Mouse
+        </button>
+
+        <button
+            class="nav-item"
+            data-category="accessories"
+            type="button"
+        >
+            Accessories
+        </button>
+
+        <button
+            class="nav-item"
+            data-category="deals"
+            type="button"
+        >
+            Best Deals
+        </button>
+
+        <button
+            class="nav-item"
+            data-category="top"
+            type="button"
+        >
+            Top Products
+        </button>
+
+    </nav>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main>
+
+        <!-- ================= SEARCH ================= -->
+
+        <section class="search-section">
+
+            <div class="search-box">
 
                 <input
-                    type="password"
-                    id="password"
-                    placeholder="Enter your password"
-                    autocomplete="current-password"
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search for headphones, mouse, keyboard..."
+                    autocomplete="off"
                 >
 
                 <button
+                    id="searchButton"
                     type="button"
-                    class="password-toggle"
-                    onclick="togglePassword()"
-                    id="passwordToggle"
                 >
-                    👁️
+                    Search
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= AI ANSWER ================= -->
+
+        <section
+            id="aiAnswer"
+            class="ai-answer"
+            style="display:none;"
+        >
+
+            <h2>🤖 AI Recommendation</h2>
+
+            <div id="aiAnswerContent"></div>
+
+        </section>
+
+
+        <!-- ================= PRODUCTS HEADER ================= -->
+
+        <section class="products-header">
+
+            <div>
+
+                <h2>🛍️ All Products</h2>
+
+                <p>
+                    Explore our products
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= PRODUCT AREA ================= -->
+
+        <section class="product-section">
+
+            <div class="product-intro">
+
+                <h2>
+                    🛍️ Explore Our Products
+                </h2>
+
+                <p>
+                    Discover the best products recommended
+                    by our AI shopping agent.
+                </p>
+
+            </div>
+
+
+            <!--
+                JavaScript loads all products here.
+                CSS controls the horizontal grid.
+            -->
+
+            <div
+                id="products"
+                class="products"
+            >
+
+                <div
+                    class="loading"
+                    id="loading"
+                >
+                    Loading products...
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================================================= -->
+    <!-- ================= CART MODAL ==================== -->
+    <!-- ================================================= -->
+
+    <div
+        id="cartModal"
+        class="modal"
+        style="display:none;"
+    >
+
+        <div class="modal-content">
+
+            <button
+                id="closeCart"
+                class="modal-close"
+                type="button"
+            >
+                ×
+            </button>
+
+            <h2>
+                🛒 Your Cart
+            </h2>
+
+            <div id="cartItems">
+
+                <p class="empty-message">
+                    Your cart is empty.
+                </p>
+
+            </div>
+
+            <div class="cart-footer">
+
+                <strong>
+                    Total:
+                    ₹<span id="cartTotal">0</span>
+                </strong>
+
+                <button
+                    id="checkoutButton"
+                    class="checkout-button"
+                    type="button"
+                >
+                    Proceed to Checkout
                 </button>
 
             </div>
 
         </div>
 
+    </div>
 
-        <div class="options">
 
-            <label class="remember">
+    <!-- ================================================= -->
+    <!-- ================= CHECKOUT MODAL ================ -->
+    <!-- ================================================= -->
+
+    <!--
+        IMPORTANT:
+        This was missing from your previous index.html.
+
+        Your script.js looks for:
+        id="checkoutModal"
+
+        So this section MUST exist.
+    -->
+
+    <div
+        id="checkoutModal"
+        class="modal"
+        style="display:none;"
+    >
+
+        <div class="modal-content checkout-modal-content">
+
+            <button
+                id="closeCheckout"
+                class="modal-close"
+                type="button"
+            >
+                ×
+            </button>
+
+
+            <h2>
+                💳 Checkout
+            </h2>
+
+
+            <p class="checkout-subtitle">
+                Complete your order and proceed to payment.
+            </p>
+
+
+            <!-- ORDER SUMMARY -->
+
+            <div
+                id="checkoutSummary"
+                class="checkout-summary"
+            >
+
+                <h3>
+                    Order Summary
+                </h3>
+
+                <div id="checkoutItems">
+
+                    <!-- JavaScript will add items here -->
+
+                </div>
+
+
+                <div class="checkout-total">
+
+                    <strong>
+                        Total Amount:
+                    </strong>
+
+                    <strong>
+                        ₹<span id="checkoutTotal">0</span>
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- CUSTOMER DETAILS -->
+
+            <div class="checkout-form">
+
+                <h3>
+                    Customer Details
+                </h3>
+
+
+                <label for="checkoutName">
+                    Name
+                </label>
 
                 <input
-                    type="checkbox"
-                    id="remember"
+                    type="text"
+                    id="checkoutName"
+                    placeholder="Enter your name"
+                    autocomplete="name"
                 >
 
-                Remember me
 
-            </label>
+                <label for="checkoutEmail">
+                    Email
+                </label>
 
-            <span
-                class="forgot"
-                onclick="forgotPassword()"
+                <input
+                    type="email"
+                    id="checkoutEmail"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                >
+
+
+                <label for="checkoutPhone">
+                    Phone Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="checkoutPhone"
+                    placeholder="Enter your phone number"
+                    autocomplete="tel"
+                >
+
+
+                <label for="checkoutAddress">
+                    Delivery Address
+                </label>
+
+                <textarea
+                    id="checkoutAddress"
+                    placeholder="Enter full delivery address with pincode..."
+                    rows="3"
+                ></textarea>
+
+            </div>
+
+
+            <!-- PAYMENT BUTTON -->
+
+            <button
+                id="payNowButton"
+                class="pay-now-button"
+                type="button"
+                onclick="startPayment()"
             >
-                Forgot Password?
-            </span>
-
-        </div>
+                💳 Pay Now
+            </button>
 
 
-        <button
-            class="login-button"
-            onclick="login()"
-        >
-            🔐 Login
-        </button>
+            <!-- BACK TO CART -->
 
-
-        <div class="divider">
-            OR
-        </div>
-
-
-        <div class="signup">
-
-            Don't have an account?
-
-            <a onclick="createAccount()">
-                Create Account
-            </a>
+            <button
+                id="backToCart"
+                class="back-cart-button"
+                type="button"
+            >
+                ← Back to Cart
+            </button>
 
         </div>
 
     </div>
 
 
-    <div class="back-home">
+    <!-- ================================================= -->
+    <!-- ================= PROFILE MODAL ================= -->
+    <!-- ================================================= -->
 
-        <a href="index.html">
-            ← Continue without login
-        </a>
+    <div
+        id="profileModal"
+        class="modal"
+        style="display:none;"
+    >
+
+        <div class="modal-content profile-modal-content">
+
+            <button
+                id="closeProfile"
+                class="modal-close"
+                type="button"
+            >
+                ×
+            </button>
+
+            <!-- PROFILE HEADER BANNER -->
+            <div class="profile-header-banner">
+                <div class="profile-avatar-circle">
+                    <span id="profileAvatarText">👤</span>
+                </div>
+                <div class="profile-user-headline">
+                    <h2 id="profileDisplayName">User Account</h2>
+                    <p id="profileDisplayEmail">Manage account settings, orders, and preferences</p>
+                </div>
+            </div>
+
+            <!-- PROFILE TAB NAVIGATION -->
+            <div class="profile-tabs">
+                <button class="profile-tab active" data-tab="tab-account" type="button">
+                    👤 Account
+                </button>
+                <button class="profile-tab" data-tab="tab-orders" type="button">
+                    📦 My Orders
+                </button>
+                <button class="profile-tab" data-tab="tab-cart" type="button">
+                    🛒 My Cart
+                </button>
+                <button class="profile-tab" data-tab="tab-settings" type="button">
+                    ⚙️ Settings
+                </button>
+            </div>
+
+            <!-- TAB 1: ACCOUNT DETAILS -->
+            <div id="tab-account" class="profile-tab-content active">
+                <div class="profile-info">
+                    <label for="profileName">Full Name</label>
+                    <input
+                        type="text"
+                        id="profileName"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                    >
+
+                    <label for="profileEmail">Email Address</label>
+                    <input
+                        type="email"
+                        id="profileEmail"
+                        placeholder="Enter your email address"
+                        autocomplete="email"
+                    >
+
+                    <label for="profilePhone">Phone Number</label>
+                    <input
+                        type="tel"
+                        id="profilePhone"
+                        placeholder="Enter your phone number"
+                        autocomplete="tel"
+                    >
+
+                    <label for="profileAddress">Default Delivery Address</label>
+                    <textarea
+                        id="profileAddress"
+                        placeholder="Enter default delivery address with pincode..."
+                        rows="3"
+                    ></textarea>
+
+                    <button
+                        id="saveProfile"
+                        class="save-profile-button"
+                        type="button"
+                    >
+                        💾 Save Account Details
+                    </button>
+                </div>
+            </div>
+
+            <!-- TAB 2: MY ORDERS -->
+            <div id="tab-orders" class="profile-tab-content" style="display:none;">
+                <div id="ordersList" class="orders-list">
+                    <p class="empty-message">No past orders found. Start shopping today!</p>
+                </div>
+            </div>
+
+            <!-- TAB 3: MY CART QUICK VIEW -->
+            <div id="tab-cart" class="profile-tab-content" style="display:none;">
+                <div id="profileCartSummary" class="profile-cart-summary">
+                    <!-- JS renders cart preview -->
+                </div>
+            </div>
+
+            <!-- TAB 4: SETTINGS & PREFERENCES -->
+            <div id="tab-settings" class="profile-tab-content" style="display:none;">
+                <div class="settings-group">
+                    <div class="setting-item">
+                        <div>
+                            <strong>🔔 Order & Deal Notifications</strong>
+                            <p style="font-size:12px; color:#64748b; margin-top:2px;">Get real-time AI recommendations and order updates</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="settingNotifications" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="setting-item">
+                        <div>
+                            <strong>🌙 Dark Mode Theme</strong>
+                            <p style="font-size:12px; color:#64748b; margin-top:2px;">Switch to high-contrast dark aesthetic UI</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="settingDarkMode">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="setting-item">
+                        <div>
+                            <strong>💱 Currency Symbol</strong>
+                            <p style="font-size:12px; color:#64748b; margin-top:2px;">Choose display currency format</p>
+                        </div>
+                        <select id="settingCurrency" class="setting-select">
+                            <option value="INR" selected>INR (₹)</option>
+                            <option value="USD">USD ($)</option>
+                            <option value="EUR">EUR (€)</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-top: 25px; border-top: 1px solid #e2e8f0; padding-top: 18px; display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button type="button" class="danger-button" style="background: #dc2626; color: white; border: none; padding: 10px 16px; border-radius: 8px; font-weight: bold; cursor: pointer;" onclick="logout()">
+                            🚪 Logout
+                        </button>
+                        <button type="button" class="danger-button" onclick="clearUserData()">
+                            🗑️ Reset Local Account & Data
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
     </div>
 
-</div>
+
+    <!-- ================================================= -->
+    <!-- ============ ORDER SUCCESS MODAL ================ -->
+    <!-- ================================================= -->
+
+    <div
+        id="orderSuccessModal"
+        class="modal"
+        style="display:none;"
+    >
+
+        <div class="modal-content success-modal-content" style="text-align: center; max-width: 500px;">
+
+            <button
+                id="closeOrderSuccess"
+                class="modal-close"
+                type="button"
+                onclick="closeModal('orderSuccessModal')"
+            >
+                ×
+            </button>
+
+            <div style="font-size: 55px; margin-bottom: 8px;">🎉</div>
+
+            <h2 style="color: #16a34a; margin-bottom: 6px;">Order Placed Successfully!</h2>
+            <p style="color: #64748b; margin-bottom: 18px; font-size: 14px;">Thank you for shopping with AI Shopping Agent.</p>
+
+            <div id="orderSuccessDetails" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; text-align: left; margin-bottom: 20px; font-size: 14px; line-height: 1.6;">
+            </div>
+
+            <button
+                type="button"
+                class="pay-now-button"
+                style="background: #16a34a;"
+                onclick="closeModal('orderSuccessModal')"
+            >
+                🛍️ Continue Shopping
+            </button>
+
+        </div>
+
+    </div>
 
 
-<script>
 
-function togglePassword() {
+    <!-- ================================================= -->
+    <!-- ============== PRODUCT DETAILS MODAL ============ -->
+    <!-- ================================================= -->
 
-    const password =
-        document.getElementById("password");
+    <div
+        id="productModal"
+        class="modal"
+        style="display:none;"
+    >
 
-    const toggle =
-        document.getElementById("passwordToggle");
+        <div class="modal-content product-modal-content">
 
-    if (password.type === "password") {
+            <button
+                id="closeProduct"
+                class="modal-close"
+                type="button"
+            >
+                ×
+            </button>
 
-        password.type = "text";
+            <div id="productDetails"></div>
 
-        toggle.textContent = "🙈";
+        </div>
 
-    } else {
-
-        password.type = "password";
-
-        toggle.textContent = "👁️";
-
-    }
-}
-
-
-function login() {
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim().toLowerCase();
-    const password = document.getElementById("password").value.trim();
-    const message = document.getElementById("message");
-
-    message.className = "message";
-    message.textContent = "";
-
-    if (!name) {
-        message.textContent = "Please enter your name.";
-        message.classList.add("error");
-        return;
-    }
-
-    if (!email) {
-        message.textContent = "Please enter your email address.";
-        message.classList.add("error");
-        return;
-    }
-
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-        message.textContent = "Please enter a valid email address.";
-        message.classList.add("error");
-        return;
-    }
-
-    if (!password) {
-        message.textContent = "Please enter your password.";
-        message.classList.add("error");
-        return;
-    }
-
-    if (password.length < 6) {
-        message.textContent = "Password must contain at least 6 characters.";
-        message.classList.add("error");
-        return;
-    }
-
-    // Replace these with the credentials you want to use.
-    const correctEmail = "YOUR_EMAIL@gmail.com";
-    const correctPassword = "YOUR_PASSWORD";
-
-    if (email !== correctEmail || password !== correctPassword) {
-        message.textContent = "Incorrect email or password.";
-        message.classList.add("error");
-        return;
-    }
-
-    localStorage.setItem("isLoggedIn", "true");
-    localStorage.setItem("userName", name);
-    localStorage.setItem("userEmail", email);
-
-    message.textContent = "Login successful!";
-    message.classList.add("success");
-
-    setTimeout(function() {
-        window.location.href = "index.html";
-    }, 500);
-}
-
-function forgotPassword() {
-
-    const message =
-        document.getElementById("message");
-
-    message.className = "message";
-
-    message.textContent =
-        "Password recovery will be added soon.";
-
-    message.classList.add("success");
-
-}
+    </div>
 
 
-function createAccount() {
+    <!-- ================================================= -->
+    <!-- ================= TOAST MESSAGE ================= -->
+    <!-- ================================================= -->
 
-    const message =
-        document.getElementById("message");
-
-    message.className = "message";
-
-    message.textContent =
-        "Signup page will be added next.";
-
-    message.classList.add("success");
-
-}
+    <div
+        id="toast"
+        class="toast"
+        style="display:none;"
+    >
+    </div>
 
 
-document.addEventListener(
-    "keydown",
-    function(event) {
+    <!-- ================================================= -->
+    <!-- ================= RAZORPAY ====================== -->
+    <!-- ================================================= -->
 
-        if (event.key === "Enter") {
+    <!-- Razorpay Checkout SDK -->
 
-            login();
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
-        }
 
-    }
-);
+    <!-- ================================================= -->
+    <!-- ================= YOUR SCRIPT ==================== -->
+    <!-- ================================================= -->
 
-</script>
+    <script src="script.js"></script>
 
 </body>
 </html>
