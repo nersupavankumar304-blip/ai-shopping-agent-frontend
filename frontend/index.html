@@ -1,51 +1,1388 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>AI Shopping Agent</title>
 
-    <link rel="stylesheet" href="style.css">
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f1f3f6;
+            color: #172033;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        header {
+            background: linear-gradient(
+                135deg,
+                #101a38,
+                #23479b
+            );
+
+            color: white;
+
+            min-height: 145px;
+
+            padding: 25px 45px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 25px;
+        }
+
+        .header-left {
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+        }
+
+        .logo {
+            font-size: 52px;
+
+            line-height: 1;
+        }
+
+        .title-area h1 {
+            font-size: 40px;
+
+            margin: 0;
+
+            font-weight: 700;
+        }
+
+        .title-area p {
+            margin-top: 8px;
+
+            font-size: 19px;
+
+            color: #dbeafe;
+        }
+
+        .header-buttons {
+            display: flex;
+
+            gap: 12px;
+
+            align-items: center;
+        }
+
+        .header-button {
+            border: none;
+
+            background: white;
+
+            color: #111827;
+
+            padding: 14px 22px;
+
+            border-radius: 12px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .header-button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 6px 18px rgba(0,0,0,0.2);
+        }
+
+        .cart-count {
+            display: inline-flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            width: 24px;
+
+            height: 24px;
+
+            margin-left: 6px;
+
+            background: #ff3b30;
+
+            color: white;
+
+            border-radius: 50%;
+
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           NAVIGATION BAR
+        ===================================================== */
+
+        .store-nav {
+            background: #172337;
+
+            color: white;
+
+            min-height: 48px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 28px;
+
+            padding: 0 45px;
+
+            overflow-x: auto;
+
+            white-space: nowrap;
+        }
+
+        .store-nav span {
+            font-size: 14px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        .store-nav span:hover {
+            color: #93c5fd;
+        }
+
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        main {
+            width: 100%;
+
+            max-width: 1500px;
+
+            margin: 0 auto;
+
+            padding: 25px 30px 70px;
+        }
+
+
+        /* =====================================================
+           SEARCH
+        ===================================================== */
+
+        .search-container {
+            width: 100%;
+
+            display: flex;
+
+            gap: 12px;
+
+            margin-bottom: 25px;
+        }
+
+        #searchInput {
+            flex: 1;
+
+            height: 58px;
+
+            padding: 0 20px;
+
+            border: 2px solid #2563eb;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            background: white;
+
+            font-size: 17px;
+        }
+
+        #searchInput:focus {
+            box-shadow:
+                0 0 0 4px rgba(37,99,235,0.12);
+        }
+
+        #searchButton {
+            width: 125px;
+
+            height: 58px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #2563eb;
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        #searchButton:hover {
+            background: #1d4ed8;
+        }
+
+        #searchButton:disabled {
+            opacity: 0.7;
+
+            cursor: wait;
+        }
+
+
+        /* =====================================================
+           AI ANSWER
+        ===================================================== */
+
+        #aiAnswer {
+            background: white;
+
+            border-radius: 14px;
+
+            padding: 20px 24px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 3px 12px rgba(0,0,0,0.06);
+
+            border-left: 4px solid #2563eb;
+        }
+
+        #aiAnswer:empty {
+            display: none;
+        }
+
+        #aiAnswer h2 {
+            margin-bottom: 10px;
+
+            color: #2563eb;
+
+            font-size: 23px;
+        }
+
+        .recommendation-text {
+            line-height: 1.7;
+
+            font-size: 15px;
+        }
+
+        .recommendation-item {
+            background: #f8fafc;
+
+            padding: 12px;
+
+            margin: 8px 0;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+        }
+
+        .recommendation-reason {
+            color: #4b5563;
+
+            padding: 5px 0 10px 15px;
+        }
+
+
+        /* =====================================================
+           HOME STORE SECTION
+        ===================================================== */
+
+        .home-section {
+            margin-top: 10px;
+        }
+
+        .home-heading {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 18px;
+        }
+
+        .home-heading h2 {
+            font-size: 27px;
+
+            color: #111827;
+        }
+
+        .home-heading p {
+            margin-top: 5px;
+
+            color: #64748b;
+
+            font-size: 15px;
+        }
+
+
+        /* =====================================================
+           PRODUCT GRID
+           
+           IMPORTANT:
+           4 PRODUCTS HORIZONTALLY
+        ===================================================== */
+
+        #products {
+            width: 100%;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 20px;
+
+            align-items: stretch;
+        }
+
+
+        /* =====================================================
+           PRODUCT CARD
+        ===================================================== */
+
+        .product-card {
+            position: relative;
+
+            min-width: 0;
+
+            background: white;
+
+            border-radius: 14px;
+
+            padding: 16px;
+
+            border: 1px solid #e5e7eb;
+
+            box-shadow:
+                0 3px 12px rgba(0,0,0,0.07);
+
+            overflow: hidden;
+
+            display: flex;
+
+            flex-direction: column;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 10px 25px rgba(0,0,0,0.13);
+        }
+
+
+        /* =====================================================
+           DISCOUNT
+        ===================================================== */
+
+        .discount-badge {
+            position: absolute;
+
+            top: 12px;
+
+            left: 12px;
+
+            z-index: 5;
+
+            background: #ef4444;
+
+            color: white;
+
+            padding: 6px 9px;
+
+            border-radius: 6px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+
+        /* =====================================================
+           PRODUCT IMAGE
+        ===================================================== */
+
+        .product-image {
+            width: 100%;
+
+            height: 220px;
+
+            object-fit: contain;
+
+            display: block;
+
+            background: white;
+
+            margin-bottom: 10px;
+        }
+
+
+        /* =====================================================
+           PRODUCT NAME
+        ===================================================== */
+
+        .product-card h3 {
+            font-size: 18px;
+
+            line-height: 1.3;
+
+            color: #111827;
+
+            margin: 7px 0;
+        }
+
+
+        /* =====================================================
+           CATEGORY
+        ===================================================== */
+
+        .category {
+            display: inline-block;
+
+            width: fit-content;
+
+            background: #eff6ff;
+
+            color: #2563eb;
+
+            padding: 5px 9px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            text-transform: capitalize;
+
+            margin-bottom: 8px;
+        }
+
+
+        /* =====================================================
+           RATING
+        ===================================================== */
+
+        .rating {
+            color: #111827;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            margin: 5px 0 8px;
+        }
+
+        .review-count {
+            color: #6b7280;
+
+            font-size: 12px;
+
+            font-weight: normal;
+        }
+
+
+        /* =====================================================
+           PRICE
+        ===================================================== */
+
+        .price-section {
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            margin: 5px 0 10px;
+        }
+
+        .old-price {
+            color: #9ca3af;
+
+            text-decoration: line-through;
+
+            font-size: 13px;
+        }
+
+        .price {
+            color: #16a34a;
+
+            font-size: 22px;
+
+            font-weight: bold;
+        }
+
+
+        /* =====================================================
+           DESCRIPTION
+        ===================================================== */
+
+        .product-card p {
+            color: #4b5563;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+
+            margin-bottom: 8px;
+        }
+
+
+        /* =====================================================
+           FEATURES
+        ===================================================== */
+
+        .product-card strong {
+            color: #111827;
+
+            font-size: 14px;
+
+            margin-top: 8px;
+
+            margin-bottom: 5px;
+        }
+
+        .product-card ul {
+            padding-left: 18px;
+
+            margin-bottom: 12px;
+
+            color: #4b5563;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+        .product-card li {
+            margin-bottom: 2px;
+        }
+
+
+        /* =====================================================
+           BUTTONS
+        ===================================================== */
+
+        .card-buttons {
+            display: flex;
+
+            gap: 7px;
+
+            margin-top: auto;
+
+            padding-top: 8px;
+        }
+
+        .buy-button,
+        .add-cart-button {
+            flex: 1;
+
+            min-width: 0;
+
+            border: none;
+
+            padding: 11px 8px;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            text-decoration: none;
+        }
+
+        .buy-button {
+            background: #2563eb;
+
+            color: white;
+        }
+
+        .buy-button:hover {
+            background: #1d4ed8;
+        }
+
+        .add-cart-button {
+            background: #111827;
+
+            color: white;
+        }
+
+        .add-cart-button:hover {
+            background: #374151;
+        }
+
+
+        /* =====================================================
+           LOADING
+        ===================================================== */
+
+        .loading {
+            grid-column: 1 / -1;
+
+            text-align: center;
+
+            padding: 50px;
+
+            color: #2563eb;
+
+            font-size: 18px;
+        }
+
+        .loading-spinner {
+            width: 32px;
+
+            height: 32px;
+
+            border: 4px solid #dbeafe;
+
+            border-top: 4px solid #2563eb;
+
+            border-radius: 50%;
+
+            animation: spin 0.8s linear infinite;
+
+            margin: 0 auto 12px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+
+        /* =====================================================
+           ERROR
+        ===================================================== */
+
+        .error {
+            grid-column: 1 / -1;
+
+            background: #fee2e2;
+
+            color: #991b1b;
+
+            padding: 20px;
+
+            border-radius: 12px;
+
+            text-align: center;
+        }
+
+
+        /* =====================================================
+           MODALS
+        ===================================================== */
+
+        .modal {
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0,0,0,0.60);
+
+            z-index: 9999;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 20px;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-box {
+            width: 100%;
+
+            max-width: 600px;
+
+            max-height: 88vh;
+
+            overflow-y: auto;
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            border-bottom: 1px solid #e5e7eb;
+
+            padding-bottom: 15px;
+
+            margin-bottom: 15px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+
+            font-size: 22px;
+        }
+
+        .close-button {
+            border: none;
+
+            background: #f3f4f6;
+
+            width: 38px;
+
+            height: 38px;
+
+            border-radius: 50%;
+
+            font-size: 21px;
+
+            cursor: pointer;
+        }
+
+        .close-button:hover {
+            background: #e5e7eb;
+        }
+
+
+        /* =====================================================
+           CART
+        ===================================================== */
+
+        .cart-item {
+            display: grid;
+
+            grid-template-columns: 70px 1fr auto;
+
+            gap: 14px;
+
+            align-items: center;
+
+            padding: 16px 0;
+
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .cart-item img {
+            width: 65px;
+
+            height: 65px;
+
+            object-fit: contain;
+
+            border-radius: 8px;
+        }
+
+        .cart-item-info h4 {
+            margin-bottom: 6px;
+
+            font-size: 15px;
+        }
+
+        .cart-item-price {
+            color: #16a34a;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+        }
+
+        .quantity-controls {
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+        }
+
+        .quantity-button {
+            width: 30px;
+
+            height: 30px;
+
+            border: 1px solid #d1d5db;
+
+            background: #f9fafb;
+
+            border-radius: 7px;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .quantity-value {
+            min-width: 25px;
+
+            text-align: center;
+
+            font-weight: bold;
+        }
+
+        .remove-cart {
+            border: none;
+
+            background: #fee2e2;
+
+            color: #dc2626;
+
+            padding: 8px 10px;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+        .cart-summary {
+            margin-top: 20px;
+
+            padding-top: 15px;
+
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .summary-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            margin: 8px 0;
+
+            color: #4b5563;
+        }
+
+        .summary-row.total {
+            color: #111827;
+
+            font-size: 20px;
+
+            font-weight: bold;
+
+            margin-top: 15px;
+        }
+
+        .proceed-button {
+            width: 100%;
+
+            margin-top: 18px;
+
+            border: none;
+
+            padding: 14px;
+
+            border-radius: 10px;
+
+            background: #16a34a;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .proceed-button:hover {
+            background: #15803d;
+        }
+
+        .empty-cart {
+            text-align: center;
+
+            padding: 40px 10px;
+
+            color: #6b7280;
+        }
+
+
+        /* =====================================================
+           PROFILE
+        ===================================================== */
+
+        .profile-content {
+            padding: 10px;
+        }
+
+        .profile-top {
+            text-align: center;
+
+            padding: 15px 0 20px;
+
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .profile-icon {
+            font-size: 55px;
+        }
+
+        .profile-top h3 {
+            margin-top: 8px;
+        }
+
+        .profile-top p {
+            color: #6b7280;
+
+            margin-top: 5px;
+
+            word-break: break-word;
+        }
+
+        .profile-menu-button {
+            width: 100%;
+
+            border: none;
+
+            background: #f8fafc;
+
+            padding: 13px;
+
+            margin-top: 9px;
+
+            border-radius: 10px;
+
+            text-align: left;
+
+            font-size: 15px;
+
+            cursor: pointer;
+        }
+
+        .profile-menu-button:hover {
+            background: #eef2ff;
+        }
+
+        .profile-logout {
+            color: #dc2626;
+
+            font-weight: bold;
+        }
+
+
+        /* =====================================================
+           CHECKOUT
+        ===================================================== */
+
+        .checkout-box {
+            width: 100%;
+
+            max-width: 700px;
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 25px;
+        }
+
+        .checkout-field {
+            margin-bottom: 18px;
+        }
+
+        .checkout-field label {
+            display: block;
+
+            font-weight: bold;
+
+            margin-bottom: 7px;
+        }
+
+        .checkout-field input,
+        .checkout-field textarea {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 9px;
+
+            font-size: 15px;
+
+            font-family: inherit;
+
+            outline: none;
+        }
+
+        .checkout-field input:focus,
+        .checkout-field textarea:focus {
+            border-color: #2563eb;
+        }
+
+        .checkout-field textarea {
+            min-height: 85px;
+
+            resize: vertical;
+        }
+
+        .payment-options {
+            display: grid;
+
+            gap: 10px;
+
+            margin-top: 10px;
+        }
+
+        .payment-option {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 10px;
+
+            padding: 13px;
+
+            cursor: pointer;
+        }
+
+        .checkout-total {
+            background: #f8fafc;
+
+            border-radius: 12px;
+
+            padding: 16px;
+
+            margin: 20px 0;
+        }
+
+        .checkout-total-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            margin: 8px 0;
+        }
+
+        .checkout-total-row.final {
+            border-top: 1px solid #e5e7eb;
+
+            padding-top: 12px;
+
+            margin-top: 12px;
+
+            font-size: 20px;
+
+            font-weight: bold;
+        }
+
+        .place-order-button {
+            width: 100%;
+
+            border: none;
+
+            background: #16a34a;
+
+            color: white;
+
+            padding: 15px;
+
+            border-radius: 11px;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .place-order-button:hover {
+            background: #15803d;
+        }
+
+        .back-cart-button {
+            width: 100%;
+
+            margin-top: 10px;
+
+            border: none;
+
+            background: #eef2ff;
+
+            color: #1d4ed8;
+
+            padding: 13px;
+
+            border-radius: 10px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .payment-note {
+            color: #6b7280;
+
+            font-size: 13px;
+
+            margin-top: 8px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        /* 3 PRODUCTS */
+        @media (max-width: 1150px) {
+
+            #products {
+                grid-template-columns:
+                    repeat(3, minmax(0, 1fr));
+            }
+
+        }
+
+
+        /* 2 PRODUCTS */
+        @media (max-width: 850px) {
+
+            header {
+                padding: 22px 25px;
+            }
+
+            .title-area h1 {
+                font-size: 32px;
+            }
+
+            main {
+                padding: 22px 20px 50px;
+            }
+
+            #products {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .product-image {
+                height: 210px;
+            }
+
+        }
+
+
+        /* MOBILE */
+        @media (max-width: 600px) {
+
+            header {
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                padding: 22px 18px;
+            }
+
+            .header-left {
+                width: 100%;
+            }
+
+            .logo {
+                font-size: 42px;
+            }
+
+            .title-area h1 {
+                font-size: 28px;
+            }
+
+            .title-area p {
+                font-size: 15px;
+            }
+
+            .header-buttons {
+                width: 100%;
+            }
+
+            .header-button {
+                flex: 1;
+            }
+
+            .store-nav {
+                padding: 0 18px;
+
+                gap: 20px;
+            }
+
+            main {
+                padding: 18px 12px 40px;
+            }
+
+            .search-container {
+                flex-direction: column;
+            }
+
+            #searchInput {
+                width: 100%;
+
+                height: 54px;
+            }
+
+            #searchButton {
+                width: 100%;
+
+                height: 54px;
+            }
+
+            #products {
+                grid-template-columns: 1fr;
+
+                gap: 16px;
+            }
+
+            .product-image {
+                height: 230px;
+            }
+
+            .cart-item {
+                grid-template-columns:
+                    55px 1fr;
+            }
+
+            .cart-item img {
+                width: 52px;
+
+                height: 52px;
+            }
+
+            .remove-cart {
+                grid-column: 2;
+
+                width: fit-content;
+            }
+
+        }
+
+    </style>
 </head>
 
+
 <body>
+
     <script>
-if (localStorage.getItem("isLoggedIn") !== "true") {
-    window.location.href = "login.html";
-}
-</script>
+        if (localStorage.getItem("isLoggedIn") !== "true") {
+            window.location.href = "login.html";
+        }
+    </script>
 
-    <!-- ================= HEADER ================= -->
 
-    <header class="main-header">
+    <!-- =====================================================
+         HEADER
+    ===================================================== -->
+
+    <header>
 
         <div class="header-left">
 
-            <div class="logo">🛍️</div>
+            <div class="logo">
+                🛍️
+            </div>
 
-            <div>
-                <h1>AI Shopping Agent</h1>
-                <p>Find the right product with AI</p>
+            <div class="title-area">
+
+                <h1>
+                    AI Shopping Agent
+                </h1>
+
+                <p>
+                    Find the right product with AI
+                </p>
+
             </div>
 
         </div>
 
-        <div class="header-actions">
+
+        <div class="header-buttons">
 
             <button
-                id="cartButton"
                 class="header-button"
-                type="button"
+                onclick="openCart()"
             >
                 🛒 Cart
-                <span id="cartCount">0</span>
+
+                <span
+                    id="cartCount"
+                    class="cart-count"
+                >
+                    0
+                </span>
+
             </button>
 
+
             <button
-                id="profileButton"
                 class="header-button"
-                type="button"
+                onclick="openProfile()"
             >
                 👤 Profile
             </button>
@@ -55,241 +1392,237 @@ if (localStorage.getItem("isLoggedIn") !== "true") {
     </header>
 
 
-    <!-- ================= NAVIGATION ================= -->
+    <!-- =====================================================
+         STORE NAVIGATION
+    ===================================================== -->
 
-    <nav class="navbar">
+    <nav class="store-nav">
 
-        <button
-            class="nav-item active"
-            data-category="all"
-            type="button"
-        >
-            ☰ All
-        </button>
+        <span>☰ All</span>
 
-        <button
-            class="nav-item"
-            data-category="electronics"
-            type="button"
-        >
-            Electronics
-        </button>
+        <span>Electronics</span>
 
-        <button
-            class="nav-item"
-            data-category="laptops"
-            type="button"
-        >
-            💻 Laptops
-        </button>
+        <span>Headphones</span>
 
-        <button
-            class="nav-item"
-            data-category="headphones"
-            type="button"
-        >
-            Headphones
-        </button>
+        <span>Earbuds</span>
 
-        <button
-            class="nav-item"
-            data-category="earbuds"
-            type="button"
-        >
-            Earbuds
-        </button>
+        <span>Keyboards</span>
 
-        <button
-            class="nav-item"
-            data-category="keyboards"
-            type="button"
-        >
-            Keyboards
-        </button>
+        <span>Mouse</span>
 
-        <button
-            class="nav-item"
-            data-category="mouse"
-            type="button"
-        >
-            Mouse
-        </button>
+        <span>Accessories</span>
 
-        <button
-            class="nav-item"
-            data-category="accessories"
-            type="button"
-        >
-            Accessories
-        </button>
+        <span>Best Deals</span>
 
-        <button
-            class="nav-item"
-            data-category="deals"
-            type="button"
-        >
-            Best Deals
-        </button>
-
-        <button
-            class="nav-item"
-            data-category="top"
-            type="button"
-        >
-            Top Products
-        </button>
+        <span>Top Products</span>
 
     </nav>
 
 
-    <!-- ================= MAIN ================= -->
+    <!-- =====================================================
+         MAIN
+    ===================================================== -->
 
     <main>
 
-        <!-- ================= SEARCH ================= -->
 
-        <section class="search-section">
+        <!-- SEARCH -->
 
-            <div class="search-box">
+        <div class="search-container">
 
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="Search for headphones, mouse, keyboard..."
-                    autocomplete="off"
-                >
+            <input
+                id="searchInput"
+                type="text"
+                placeholder="Search for headphones, mouse, keyboard..."
+                autocomplete="off"
+            >
 
-                <button
-                    id="searchButton"
-                    type="button"
-                >
-                    Search
-                </button>
+            <button
+                id="searchButton"
+                type="button"
+                onclick="searchProducts()"
+            >
+                Search
+            </button>
 
-            </div>
-
-        </section>
+        </div>
 
 
-        <!-- ================= AI ANSWER ================= -->
+        <!-- AI ANSWER -->
 
-        <section
-            id="aiAnswer"
-            class="ai-answer"
-            style="display:none;"
-        >
-
-            <h2>🤖 AI Recommendation</h2>
-
-            <div id="aiAnswerContent"></div>
-
-        </section>
+        <div id="aiAnswer"></div>
 
 
-        <!-- ================= PRODUCTS HEADER ================= -->
+        <!-- =================================================
+             HOME PRODUCT SECTION
+        ================================================= -->
 
-        <section class="products-header">
+        <section class="home-section">
 
-            <div>
+            <div class="home-heading">
 
-                <h2>🛍️ All Products</h2>
+                <div>
 
-                <p>
-                    Explore our products
-                </p>
+                    <h2>
+                        🛍️ All Products
+                    </h2>
 
-            </div>
+                    <p>
+                        Explore our products
+                    </p>
 
-        </section>
-
-
-        <!-- ================= PRODUCT AREA ================= -->
-
-        <section class="product-section">
-
-            <div class="product-intro">
-
-                <h2>
-                    🛍️ Explore Our Products
-                </h2>
-
-                <p>
-                    Discover the best products recommended
-                    by our AI shopping agent.
-                </p>
+                </div>
 
             </div>
 
 
             <!--
-                JavaScript loads all products here.
-                CSS controls the horizontal grid.
+                YOUR script.js WILL LOAD ALL PRODUCTS HERE.
+
+                Desktop:
+                4 products per row
+
+                Medium:
+                3 products per row
+
+                Tablet:
+                2 products per row
+
+                Mobile:
+                1 product per row
             -->
 
-            <div
-                id="products"
-                class="products"
-            >
-
-                <div
-                    class="loading"
-                    id="loading"
-                >
-                    Loading products...
-                </div>
-
-            </div>
+            <div id="products"></div>
 
         </section>
 
     </main>
 
 
-    <!-- ================================================= -->
-    <!-- ================= CART MODAL ==================== -->
-    <!-- ================================================= -->
+    <!-- =====================================================
+         CART MODAL
+    ===================================================== -->
 
     <div
         id="cartModal"
         class="modal"
-        style="display:none;"
+        onclick="closeCartOutside(event)"
     >
 
-        <div class="modal-content">
+        <div class="modal-box">
 
-            <button
-                id="closeCart"
-                class="modal-close"
-                type="button"
-            >
-                ×
-            </button>
+            <div class="modal-header">
 
-            <h2>
-                🛒 Your Cart
-            </h2>
+                <h2>
+                    🛒 Your Cart
+                </h2>
 
-            <div id="cartItems">
-
-                <p class="empty-message">
-                    Your cart is empty.
-                </p>
+                <button
+                    class="close-button"
+                    onclick="closeCart()"
+                >
+                    ×
+                </button>
 
             </div>
 
-            <div class="cart-footer">
 
-                <strong>
-                    Total:
-                    ₹<span id="cartTotal">0</span>
-                </strong>
+            <div id="cartItems"></div>
+
+
+            <div
+                id="cartTotal"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         PROFILE MODAL
+    ===================================================== -->
+
+    <div
+        id="profileModal"
+        class="modal"
+        onclick="closeProfileOutside(event)"
+    >
+
+        <div class="modal-box">
+
+            <div class="modal-header">
+
+                <h2>
+                    👤 My Profile
+                </h2>
 
                 <button
-                    id="checkoutButton"
-                    class="checkout-button"
-                    type="button"
+                    class="close-button"
+                    onclick="closeProfile()"
                 >
-                    Proceed to Checkout
+                    ×
+                </button>
+
+            </div>
+
+
+            <div class="profile-content">
+
+                <div class="profile-top">
+
+                    <div class="profile-icon">
+                        👤
+                    </div>
+
+                    <h3 id="profileName">
+                        Shopping User
+                    </h3>
+
+                    <p id="profileEmail">
+                        Loading...
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="profile-menu-button"
+                    onclick="openCart(); closeProfile();"
+                >
+                    🛒 My Cart
+                </button>
+
+
+                <button
+                    class="profile-menu-button"
+                    onclick="openOrders(); closeProfile();"
+                >
+                    📦 My Orders
+                </button>
+
+
+                <button
+                    class="profile-menu-button"
+                    onclick="showComingSoon('Wishlist')"
+                >
+                    ❤️ Wishlist
+                </button>
+
+
+                <button
+                    class="profile-menu-button"
+                    onclick="showComingSoon('Settings')"
+                >
+                    ⚙️ Settings
+                </button>
+
+
+                <button
+                    class="profile-menu-button profile-logout"
+                    onclick="logout()"
+                >
+                    🚪 Logout
                 </button>
 
             </div>
@@ -299,124 +1632,73 @@ if (localStorage.getItem("isLoggedIn") !== "true") {
     </div>
 
 
-    <!-- ================================================= -->
-    <!-- ================= CHECKOUT MODAL ================ -->
-    <!-- ================================================= -->
-
-    <!--
-        IMPORTANT:
-        This was missing from your previous index.html.
-
-        Your script.js looks for:
-        id="checkoutModal"
-
-        So this section MUST exist.
-    -->
+    <!-- =====================================================
+         CHECKOUT / PAYMENT MODAL
+    ===================================================== -->
 
     <div
         id="checkoutModal"
         class="modal"
-        style="display:none;"
+        onclick="closeCheckoutOutside(event)"
     >
 
-        <div class="modal-content checkout-modal-content">
-
-            <button
-                id="closeCheckout"
-                class="modal-close"
-                type="button"
-            >
-                ×
-            </button>
+        <div class="checkout-box">
 
 
-            <h2>
-                💳 Checkout
-            </h2>
+            <div class="modal-header">
 
+                <h2>
+                    💳 Checkout & Payment
+                </h2>
 
-            <p class="checkout-subtitle">
-                Complete your order and proceed to payment.
-            </p>
-
-
-            <!-- ORDER SUMMARY -->
-
-            <div
-                id="checkoutSummary"
-                class="checkout-summary"
-            >
-
-                <h3>
-                    Order Summary
-                </h3>
-
-                <div id="checkoutItems">
-
-                    <!-- JavaScript will add items here -->
-
-                </div>
-
-
-                <div class="checkout-total">
-
-                    <strong>
-                        Total Amount:
-                    </strong>
-
-                    <strong>
-                        ₹<span id="checkoutTotal">0</span>
-                    </strong>
-
-                </div>
+                <button
+                    class="close-button"
+                    onclick="closeCheckout()"
+                >
+                    ×
+                </button>
 
             </div>
 
 
-            <!-- CUSTOMER DETAILS -->
+            <!-- NAME -->
 
-            <div class="checkout-form">
-
-                <h3>
-                    Customer Details
-                </h3>
-
+            <div class="checkout-field">
 
                 <label for="checkoutName">
-                    Name
+                    Full Name
                 </label>
 
                 <input
-                    type="text"
                     id="checkoutName"
-                    placeholder="Enter your name"
-                    autocomplete="name"
+                    type="text"
+                    placeholder="Enter your full name"
                 >
 
+            </div>
 
-                <label for="checkoutEmail">
-                    Email
-                </label>
 
-                <input
-                    type="email"
-                    id="checkoutEmail"
-                    placeholder="Enter your email"
-                    autocomplete="email"
-                >
+            <!-- PHONE -->
 
+            <div class="checkout-field">
 
                 <label for="checkoutPhone">
-                    Phone Number
+                    Mobile Number
                 </label>
 
                 <input
-                    type="tel"
                     id="checkoutPhone"
-                    placeholder="Enter your phone number"
-                    autocomplete="tel"
+                    type="tel"
+                    maxlength="10"
+                    placeholder="Enter your 10-digit mobile number"
                 >
 
+            </div>
+
+
+            <!-- ADDRESS -->
+
+            <div class="checkout-field">
 
                 <label for="checkoutAddress">
                     Delivery Address
@@ -424,292 +1706,125 @@ if (localStorage.getItem("isLoggedIn") !== "true") {
 
                 <textarea
                     id="checkoutAddress"
-                    placeholder="Enter full delivery address with pincode..."
-                    rows="3"
+                    placeholder="House/flat, street, city, state, PIN code"
                 ></textarea>
 
             </div>
 
 
-            <!-- PAYMENT BUTTON -->
+            <!-- PAYMENT -->
+
+            <div class="checkout-field">
+
+                <label>
+                    Payment Method
+                </label>
+
+
+                <div class="payment-options">
+
+
+                    <label class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="paymentMethod"
+                            value="upi"
+                            checked
+                        >
+
+                        <span>
+                            📱 UPI
+                        </span>
+
+                    </label>
+
+
+                    <label class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="paymentMethod"
+                            value="card"
+                        >
+
+                        <span>
+                            💳 Credit / Debit Card
+                        </span>
+
+                    </label>
+
+
+                    <label class="payment-option">
+
+                        <input
+                            type="radio"
+                            name="paymentMethod"
+                            value="cod"
+                        >
+
+                        <span>
+                            💵 Cash on Delivery
+                        </span>
+
+                    </label>
+
+
+                </div>
+
+
+                <div class="payment-note">
+                    Demo payment mode — no real money is charged.
+                </div>
+
+            </div>
+
+
+            <!-- CHECKOUT TOTAL -->
+
+            <div
+                id="checkoutSummary"
+                class="checkout-total"
+            ></div>
+
+
+            <!-- PLACE ORDER -->
 
             <button
-                id="payNowButton"
-                class="pay-now-button"
-                type="button"
-                onclick="startPayment()"
+                class="place-order-button"
+                onclick="placeOrder()"
             >
-                💳 Pay Now
+                ✅ Place Order
             </button>
 
 
-            <!-- BACK TO CART -->
+            <!-- BACK -->
 
             <button
-                id="backToCart"
                 class="back-cart-button"
-                type="button"
+                onclick="closeCheckout(); openCart();"
             >
                 ← Back to Cart
             </button>
 
-        </div>
-
-    </div>
-
-
-    <!-- ================================================= -->
-    <!-- ================= PROFILE MODAL ================= -->
-    <!-- ================================================= -->
-
-    <div
-        id="profileModal"
-        class="modal"
-        style="display:none;"
-    >
-
-        <div class="modal-content profile-modal-content">
-
-            <button
-                id="closeProfile"
-                class="modal-close"
-                type="button"
-            >
-                ×
-            </button>
-
-            <!-- PROFILE HEADER BANNER -->
-            <div class="profile-header-banner">
-                <div class="profile-avatar-circle">
-                    <span id="profileAvatarText">👤</span>
-                </div>
-                <div class="profile-user-headline">
-                    <h2 id="profileDisplayName">User Account</h2>
-                    <p id="profileDisplayEmail">Manage account settings, orders, and preferences</p>
-                </div>
-            </div>
-
-            <!-- PROFILE TAB NAVIGATION -->
-            <div class="profile-tabs">
-                <button class="profile-tab active" data-tab="tab-account" type="button">
-                    👤 Account
-                </button>
-                <button class="profile-tab" data-tab="tab-orders" type="button">
-                    📦 My Orders
-                </button>
-                <button class="profile-tab" data-tab="tab-cart" type="button">
-                    🛒 My Cart
-                </button>
-                <button class="profile-tab" data-tab="tab-settings" type="button">
-                    ⚙️ Settings
-                </button>
-            </div>
-
-            <!-- TAB 1: ACCOUNT DETAILS -->
-            <div id="tab-account" class="profile-tab-content active">
-                <div class="profile-info">
-                    <label for="profileName">Full Name</label>
-                    <input
-                        type="text"
-                        id="profileName"
-                        placeholder="Enter your full name"
-                        autocomplete="name"
-                    >
-
-                    <label for="profileEmail">Email Address</label>
-                    <input
-                        type="email"
-                        id="profileEmail"
-                        placeholder="Enter your email address"
-                        autocomplete="email"
-                    >
-
-                    <label for="profilePhone">Phone Number</label>
-                    <input
-                        type="tel"
-                        id="profilePhone"
-                        placeholder="Enter your phone number"
-                        autocomplete="tel"
-                    >
-
-                    <label for="profileAddress">Default Delivery Address</label>
-                    <textarea
-                        id="profileAddress"
-                        placeholder="Enter default delivery address with pincode..."
-                        rows="3"
-                    ></textarea>
-
-                    <button
-                        id="saveProfile"
-                        class="save-profile-button"
-                        type="button"
-                    >
-                        💾 Save Account Details
-                    </button>
-                </div>
-            </div>
-
-            <!-- TAB 2: MY ORDERS -->
-            <div id="tab-orders" class="profile-tab-content" style="display:none;">
-                <div id="ordersList" class="orders-list">
-                    <p class="empty-message">No past orders found. Start shopping today!</p>
-                </div>
-            </div>
-
-            <!-- TAB 3: MY CART QUICK VIEW -->
-            <div id="tab-cart" class="profile-tab-content" style="display:none;">
-                <div id="profileCartSummary" class="profile-cart-summary">
-                    <!-- JS renders cart preview -->
-                </div>
-            </div>
-
-            <!-- TAB 4: SETTINGS & PREFERENCES -->
-            <div id="tab-settings" class="profile-tab-content" style="display:none;">
-                <div class="settings-group">
-                    <div class="setting-item">
-                        <div>
-                            <strong>🔔 Order & Deal Notifications</strong>
-                            <p style="font-size:12px; color:#64748b; margin-top:2px;">Get real-time AI recommendations and order updates</p>
-                        </div>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="settingNotifications" checked>
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-
-                    <div class="setting-item">
-                        <div>
-                            <strong>🌙 Dark Mode Theme</strong>
-                            <p style="font-size:12px; color:#64748b; margin-top:2px;">Switch to high-contrast dark aesthetic UI</p>
-                        </div>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="settingDarkMode">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-
-                    <div class="setting-item">
-                        <div>
-                            <strong>💱 Currency Symbol</strong>
-                            <p style="font-size:12px; color:#64748b; margin-top:2px;">Choose display currency format</p>
-                        </div>
-                        <select id="settingCurrency" class="setting-select">
-                            <option value="INR" selected>INR (₹)</option>
-                            <option value="USD">USD ($)</option>
-                            <option value="EUR">EUR (€)</option>
-                        </select>
-                    </div>
-
-                    <div style="margin-top: 25px; border-top: 1px solid #e2e8f0; padding-top: 18px;">
-                        <button type="button" class="danger-button" onclick="clearUserData()">
-                            🗑️ Reset Local Account & Data
-                        </button>
-                    </div>
-                </div>
-            </div>
 
         </div>
 
     </div>
 
 
-    <!-- ================================================= -->
-    <!-- ============ ORDER SUCCESS MODAL ================ -->
-    <!-- ================================================= -->
-
-    <div
-        id="orderSuccessModal"
-        class="modal"
-        style="display:none;"
-    >
-
-        <div class="modal-content success-modal-content" style="text-align: center; max-width: 500px;">
-
-            <button
-                id="closeOrderSuccess"
-                class="modal-close"
-                type="button"
-                onclick="closeModal('orderSuccessModal')"
-            >
-                ×
-            </button>
-
-            <div style="font-size: 55px; margin-bottom: 8px;">🎉</div>
-
-            <h2 style="color: #16a34a; margin-bottom: 6px;">Order Placed Successfully!</h2>
-            <p style="color: #64748b; margin-bottom: 18px; font-size: 14px;">Thank you for shopping with AI Shopping Agent.</p>
-
-            <div id="orderSuccessDetails" style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; text-align: left; margin-bottom: 20px; font-size: 14px; line-height: 1.6;">
-            </div>
-
-            <button
-                type="button"
-                class="pay-now-button"
-                style="background: #16a34a;"
-                onclick="closeModal('orderSuccessModal')"
-            >
-                🛍️ Continue Shopping
-            </button>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- ================================================= -->
-    <!-- ============== PRODUCT DETAILS MODAL ============ -->
-    <!-- ================================================= -->
-
-    <div
-        id="productModal"
-        class="modal"
-        style="display:none;"
-    >
-
-        <div class="modal-content product-modal-content">
-
-            <button
-                id="closeProduct"
-                class="modal-close"
-                type="button"
-            >
-                ×
-            </button>
-
-            <div id="productDetails"></div>
-
-        </div>
-
-    </div>
-
-
-    <!-- ================================================= -->
-    <!-- ================= TOAST MESSAGE ================= -->
-    <!-- ================================================= -->
-
-    <div
-        id="toast"
-        class="toast"
-        style="display:none;"
-    >
-    </div>
-
-
-    <!-- ================================================= -->
-    <!-- ================= RAZORPAY ====================== -->
-    <!-- ================================================= -->
-
-    <!-- Razorpay Checkout SDK -->
-
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
-
-    <!-- ================================================= -->
-    <!-- ================= YOUR SCRIPT ==================== -->
-    <!-- ================================================= -->
+    <!-- =====================================================
+         YOUR EXISTING SCRIPT
+         
+         IMPORTANT:
+         Keep script.js in:
+         
+         frontend/script.js
+    ===================================================== -->
 
     <script src="script.js"></script>
 
+
 </body>
+
 </html>
